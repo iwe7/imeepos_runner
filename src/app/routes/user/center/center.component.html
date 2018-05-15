@@ -45,14 +45,14 @@
         <ng-template #noticeTitle>
           <div class="card-title">
             <nz-avatar [nzSrc]="item.logo" [nzSize]="'small'"></nz-avatar>
-            <a (click)="msg.info('to' + item.href)">{{item.title}}</a>
+            <a (click)="msg.info('to' + item.href)">{{item.name || ''}}</a>
           </div>
         </ng-template>
       </nz-card-meta>
       <div class="project-item">
-        <a (click)="msg.info('show user: ' + item.member)">{{item.member}}</a>
-        <span *ngIf="item.updatedAt" class="datetime" title="{{item.updatedAt}}">
-          {{item.updatedAt | _date: 'fn' }}
+        <a (click)="msg.info('show user: ' + item.member)">{{item.setmeal.groupname || '默认'}}</a>
+        <span *ngIf="item.end" class="datetime" title="{{item.end}}">
+          {{item.end || '无限制'}}
         </span>
       </div>
     </nz-card>

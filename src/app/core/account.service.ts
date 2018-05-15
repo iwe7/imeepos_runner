@@ -7,7 +7,12 @@ import { HttpClient } from '@angular/common/http';
 export class AccountService {
   constructor(public url: UrlService, public http: HttpClient) {}
 
-  list() {
-    return this.http.get(this.url.getWebOpen('web/account/list'));
+  list(params: any = {}) {
+    return this.http.get(this.url.getWebOpen('web/account/list'), {
+      params: {
+        account_type: 1,
+        ...params,
+      },
+    });
   }
 }

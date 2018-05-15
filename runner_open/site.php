@@ -49,6 +49,11 @@ class Runner_openModuleSite extends WeModuleSite
                 $_W['uid'] = $record['uid'];
                 $_W['isfounder'] = user_is_founder($record['uid']);
                 $_W['user'] = $record;
+
+                if (!empty($_W['uid'])) {
+                    $_W['highest_role'] = permission_account_user_role($_W['uid']);
+                    $_W['role'] = permission_account_user_role($_W['uid'], $_W['uniacid']);
+                }
             }
         }
     }
