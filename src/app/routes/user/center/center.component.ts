@@ -3,6 +3,7 @@ import { SettingsService } from '@delon/theme';
 import { AccountService } from '@core/account.service';
 import { map, tap } from 'rxjs/operators';
 import { NzMessageService } from 'ng-zorro-antd';
+import { UrlService } from '@core/url.service';
 @Component({
   selector: 'user-center',
   templateUrl: './center.component.html',
@@ -14,7 +15,13 @@ export class CenterComponent implements OnInit {
     public setting: SettingsService,
     public account: AccountService,
     public msg: NzMessageService,
+    public url: UrlService,
   ) {}
+
+  switchAccount(item: any) {
+    this.account.switchAccount(item);
+    this.msg.success('切换成功');
+  }
 
   ngOnInit() {
     this.account
@@ -43,7 +50,7 @@ export class CenterComponent implements OnInit {
       )
       .subscribe(res => {
         this.accounts = res;
-        console.log(res);
+        this.account.setAccounts(res);
       });
   }
 }

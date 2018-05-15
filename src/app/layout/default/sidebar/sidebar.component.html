@@ -1,16 +1,14 @@
 <div class="aside-inner">
   <nz-dropdown nzTrigger="click" class="user-block">
     <div nz-dropdown class="user-block-dropdown">
-      <nz-avatar class="avatar" [nzSrc]="settings.user.avatar"></nz-avatar>
+      <nz-avatar class="avatar" [nzSrc]="( account.account$ | async ).logo"></nz-avatar>
       <div class="info">
-        <strong>{{settings.user.name}}</strong>
-        <p class="text-truncate mb0">{{settings.user.email}}</p>
+        <strong>{{( account.account$ | async ).name}}</strong>
+        <p class="text-truncate mb0">{{ (account.account$ | async )?.description}}</p>
       </div>
     </div>
     <ul nz-menu>
-      <li nz-menu-item (click)="msgSrv.success('profile')">{{ 'profile' | translate }}</li>
-      <li nz-menu-item (click)="msgSrv.success('settings')">{{ 'settings' | translate }}</li>
-      <li nz-menu-item (click)="msgSrv.success('logout')">{{ 'logout' | translate }}</li>
+      <li nz-menu-item *ngFor="let item of account.accounts" (click)="switchAccount(item)">{{ item.name }}</li>
     </ul>
   </nz-dropdown>
   <sidebar-nav class="d-block py-lg"></sidebar-nav>

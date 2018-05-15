@@ -15,7 +15,12 @@ export const ENV = new InjectionToken('ENV', {
   providedIn: 'root',
 })
 export class UrlService {
-  constructor(public http: HttpClient, @Inject(ENV) private env: any) {}
+  constructor(public http: HttpClient, @Inject(ENV) private env: any) {
+    const account: any = JSON.parse(localStorage.getItem('__account'));
+    if (account) {
+      this.env.i = account.uniacid;
+    }
+  }
 
   setEnvRoot(root: string) {
     this.env.root = root;
