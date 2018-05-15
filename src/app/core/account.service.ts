@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { UrlService } from './url.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -24,8 +26,23 @@ export class AccountService {
     this.setAccount(item);
   }
 
-  setAccounts(accounts: any[]) {
-    this.accounts = accounts;
+  setAccounts(res: any[]) {
+    const ress = [];
+    for (const key in res) {
+      if (res[key].level === '4') {
+        res[key].description = '认证服务号';
+      } else if (res[key].level === '3') {
+        res[key].description = '认证订阅号';
+      } else if (res[key].level === '2') {
+        res[key].description = '普通服务号';
+      } else if (res[key].level === '1') {
+        res[key].description = '普通订阅号';
+      } else {
+        res[key].description = '未知类型';
+      }
+      ress.push(res[key]);
+    }
+    this.accounts = ress || [];
   }
 
   setAccount(item: any) {
@@ -34,11 +51,6 @@ export class AccountService {
   }
 
   list(params: any = {}) {
-    return this.http.get(this.url.getWebOpen('web/account/list'), {
-      params: {
-        account_type: 1,
-        ...params,
-      },
-    });
+    return of(this.accounts);
   }
 }

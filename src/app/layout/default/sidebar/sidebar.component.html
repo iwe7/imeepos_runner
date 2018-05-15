@@ -8,7 +8,10 @@
       </div>
     </div>
     <ul nz-menu>
-      <li nz-menu-item *ngFor="let item of account.accounts" (click)="switchAccount(item)">{{ item.name }}</li>
+      <li nz-menu-item *ngFor="let item of account.accounts" (click)="switchAccount(item)">
+        <nz-avatar nzSize="small" [nzSrc]="item.logo"></nz-avatar>
+        {{ item.name }}
+      </li>
     </ul>
   </nz-dropdown>
   <sidebar-nav class="d-block py-lg"></sidebar-nav>

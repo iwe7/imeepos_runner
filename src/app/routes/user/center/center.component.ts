@@ -26,28 +26,6 @@ export class CenterComponent implements OnInit {
   ngOnInit() {
     this.account
       .list()
-      .pipe(
-        map((res: any) => res.data),
-        map(res => res.list),
-        map(res => {
-          const ress = [];
-          for (const key in res) {
-            if (res[key].level === '4') {
-              res[key].description = '认证服务号';
-            } else if (res[key].level === '3') {
-              res[key].description = '认证订阅号';
-            } else if (res[key].level === '2') {
-              res[key].description = '普通服务号';
-            } else if (res[key].level === '1') {
-              res[key].description = '普通订阅号';
-            } else {
-              res[key].description = '未知类型';
-            }
-            ress.push(res[key]);
-          }
-          return ress;
-        }),
-      )
       .subscribe(res => {
         this.accounts = res;
         this.account.setAccounts(res);

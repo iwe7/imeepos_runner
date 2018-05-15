@@ -13,6 +13,7 @@ import { ACLService } from '@delon/acl';
 import { TranslateService } from '@ngx-translate/core';
 import { I18NService } from '../i18n/i18n.service';
 import { UrlService } from '../url.service';
+import { AccountService } from '@core/account.service';
 
 /**
  * 用于应用启动时
@@ -51,7 +52,14 @@ export class StartupService {
             const res = appData;
             this.settingService.setApp(res.app);
             this.settingService.setUser(res.user);
-            this.aclService.setFull(true);
+            this.aclService.setRole(res.user.role);
+            const acs = res.accounts;
+            const accounts = [];
+            for (const key in acs) {
+              accounts.push(acs[key]);
+            }
+            const account = this.injector.get(AccountService);
+            account.setAccounts(accounts);
             this.menuService.add(res.menu);
             this.titleService.suffix = res.app.name;
           },

@@ -11,8 +11,6 @@ $account_info = permission_user_account_num();
 $role_type = in_array($_W['role'], array(ACCOUNT_MANAGE_NAME_FOUNDER, ACCOUNT_MANAGE_NAME_OWNER, ACCOUNT_MANAGE_NAME_MANAGER));
 $account_type = $_GPC['account_type'];
 if ($do == 'display') {
-    $message_id = intval($_GPC['message_id']);
-    message_notice_read($message_id);
     $pindex = max(1, intval($_GPC['page']));
     $psize = 20;
     $account_table = table('account');
@@ -23,15 +21,6 @@ if ($do == 'display') {
         ACCOUNT_TYPE_PHONEAPP_NORMAL => array(ACCOUNT_TYPE_PHONEAPP_NORMAL),
     );
     $account_table->searchWithType($type_condition[$account_type]);
-    $keyword = trim($_GPC['keyword']);
-    if (!empty($keyword)) {
-        $account_table->searchWithKeyword($keyword);
-    }
-    if (isset($_GPC['letter']) && strlen($_GPC['letter']) == 1) {
-        $account_table->searchWithLetter($_GPC['letter']);
-    }
-    $order = trim($_GPC['order']);
-    $account_table->accountUniacidOrder($order);
     $type = trim($_GPC['type']);
     if ($type == 'noconnect') {
         $account_table->searchWithNoconnect();

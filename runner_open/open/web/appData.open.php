@@ -13,18 +13,63 @@ $user = array(
     'joindate' => $_W['user'] ? date('y-m-d', $_W['user']['joindate']) : '',
     'lastvisit' => $_W['user'] ? date('y-m-d', $_W['user']['lastvisit']) : '',
     'endtime' => $_W['user']['endtime'] ? date('y-m-d', $_W['user']['endtime']) : '永久',
+    'role' => array(
+        $_W['role'],
+    ),
 );
 
+$accounts = getAccountList();
+
 $menu = array();
-$menu[] = array();
+$menu[] = array(
+    'text' => '权限管理',
+    "group" => true,
+    "acl" => "founder",
+);
 $menu[] = array();
 
 die(json_encode(array(
     'app' => $app,
     'user' => $user,
     'menu' => $menu,
+    'accounts' => $accounts,
     "_w" => $_W['user'],
 )));
+
+function getAccountList()
+{
+    global $_W, $_GPC;
+    load()->func('file');
+    load()->model('user');
+    load()->model('message');
+    load()->model('wxapp');
+    $pindex = 1;
+    $psize = 50;
+    $type_condition = array(
+        ACCOUNT_TYPE_APP_NORMAL => array(ACCOUNT_TYPE_APP_NORMAL, ACCOUNT_TYPE_APP_AUTH),
+        ACCOUNT_TYPE_WEBAPP_NORMAL => array(ACCOUNT_TYPE_WEBAPP_NORMAL),
+        ACCOUNT_TYPE_OFFCIAL_NORMAL => array(ACCOUNT_TYPE_OFFCIAL_NORMAL, ACCOUNT_TYPE_OFFCIAL_AUTH),
+        ACCOUNT_TYPE_PHONEAPP_NORMAL => array(ACCOUNT_TYPE_PHONEAPP_NORMAL),
+    );
+    $account_table = table('account');
+    $account_table->searchWithType($type_condition[1]);
+    $account_table->searchWithPage($pindex, $psize);
+    $list = $account_table->searchAccountList();
+    foreach ($list as &$account) {
+        $account = uni_fetch($account['uniacid']);
+        $account['end'] = $account['endtime'] == 0 ? '永久' : date('Y-m-d', $account['starttime']) . '~' . date('Y-m-d', $account['endtime']);
+        $account['role'] = permission_account_user_role($_W['uid'], $account['uniacid']);
+        $account['versions'] = wxapp_get_some_lastversions($account['uniacid']);
+        if (!empty($account['versions'])) {
+            foreach ($account['versions'] as $version) {
+                if (!empty($version['current'])) {
+                    $account['current_version'] = $version;
+                }
+            }
+        }
+    }
+    return $list;
+}
 
 $json = '{
   "menu": [{
