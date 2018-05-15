@@ -10,6 +10,9 @@ $user = array(
     'name' => $_W['user']['name'] ? $_W['user']['name'] : '游客',
     'avatar' => $_W['user']['avatar'] ? $_W['user']['avatar'] : './assets/_/img/avatar.jpg',
     'email' => $_W['user']['mobile'] ? $_W['user']['mobile'] : '未填写',
+    'joindate' => $_W['user'] ? date('y-m-d', $_W['user']['joindate']) : '',
+    'lastvisit' => $_W['user'] ? date('y-m-d', $_W['user']['lastvisit']) : '',
+    'endtime' => $_W['user']['endtime'] ? date('y-m-d', $_W['user']['endtime']) : '永久',
 );
 
 $menu = array();

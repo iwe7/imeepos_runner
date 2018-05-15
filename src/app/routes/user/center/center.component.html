@@ -1,3 +1,60 @@
-<p>
-  center works!
-</p>
+<page-header>
+  <ng-template #content>
+    <div class="page-header flex-row">
+      <div class="avatar">
+        <nz-avatar [nzSrc]="setting.user.avatar"></nz-avatar>
+      </div>
+      <div class="desc">
+        <div class="desc-title">{{setting.user.name}}</div>
+        <div>{{setting.user.mobile || '未填写'}}</div>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #extra>
+    <div class="page-extra">
+      <div>
+        <p>加入时间</p>
+        <p>
+          <span>{{setting.user.joindate}}</span>
+        </p>
+      </div>
+      <div>
+        <p>上次访问</p>
+        <p>
+          <span>{{setting.user.lastvisit}}</span>
+        </p>
+      </div>
+      <div>
+        <p>过期时间</p>
+        <p>
+          <span>{{setting.user.endtime}}</span>
+        </p>
+      </div>
+    </div>
+  </ng-template>
+</page-header>
+
+
+<nz-card nzTitle="我的公众号" [nzBordered]="false" [nzLoading]="loading" class="ant-card__body-nopadding mb-lg project-list">
+  <ng-template #extra>
+    <a (click)="msg.success('to')">全部账号</a>
+  </ng-template>
+  <div *ngFor="let item of accounts" nz-card-grid class="project-grid">
+    <nz-card [nzBordered]="false" class="ant-card__body-nopadding mb0">
+      <nz-card-meta [nzTitle]="noticeTitle" [nzDescription]="item.description">
+        <ng-template #noticeTitle>
+          <div class="card-title">
+            <nz-avatar [nzSrc]="item.logo" [nzSize]="'small'"></nz-avatar>
+            <a (click)="msg.info('to' + item.href)">{{item.title}}</a>
+          </div>
+        </ng-template>
+      </nz-card-meta>
+      <div class="project-item">
+        <a (click)="msg.info('show user: ' + item.member)">{{item.member}}</a>
+        <span *ngIf="item.updatedAt" class="datetime" title="{{item.updatedAt}}">
+          {{item.updatedAt | _date: 'fn' }}
+        </span>
+      </div>
+    </nz-card>
+  </div>
+</nz-card>

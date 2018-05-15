@@ -4,11 +4,13 @@ import { CommonModule } from '@angular/common';
 import { UserRoutingModule } from './user-routing.module';
 import { CenterComponent } from './center/center.component';
 import { SettingComponent } from './setting/setting.component';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    UserRoutingModule
+    UserRoutingModule,
+    SharedModule
   ],
   declarations: [CenterComponent, SettingComponent]
 })

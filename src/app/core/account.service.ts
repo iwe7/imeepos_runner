@@ -4,20 +4,10 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
-export class UserService {
+export class AccountService {
   constructor(public url: UrlService, public http: HttpClient) {}
 
-  login(data: any) {
-    return this.http.post(this.url.getWebOpen('web/user/login/login'), data, {
-      params: {
-        _allow_anonymous: 'true',
-      },
-    });
+  list() {
+    return this.http.get(this.url.getWebOpen('web/account/list'));
   }
-
-  register() {}
-
-  forget() {}
-
-  sms() {}
 }
