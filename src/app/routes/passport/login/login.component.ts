@@ -12,7 +12,9 @@ import {
 import { ReuseTabService } from '@delon/abc';
 import { environment } from '@env/environment';
 import { StartupService } from '@core/startup/startup.service';
+import { UserService } from '@core/user.service';
 
+import { tap, map, filter } from 'rxjs/operators';
 @Component({
   selector: 'passport-login',
   templateUrl: './login.component.html',
@@ -37,9 +39,10 @@ export class UserLoginComponent implements OnDestroy {
     private reuseTabService: ReuseTabService,
     @Inject(DA_SERVICE_TOKEN) private tokenService: TokenService,
     private startupSrv: StartupService,
+    private user: UserService,
   ) {
     this.form = fb.group({
-      userName: [null, [Validators.required, Validators.minLength(5)]],
+      username: [null, [Validators.required, Validators.minLength(5)]],
       password: [null, Validators.required],
       mobile: [null, [Validators.required, Validators.pattern(/^1\d{10}$/)]],
       captcha: [null, [Validators.required]],
@@ -50,8 +53,8 @@ export class UserLoginComponent implements OnDestroy {
 
   // region: fields
 
-  get userName() {
-    return this.form.controls.userName;
+  get username() {
+    return this.form.controls.username;
   }
   get password() {
     return this.form.controls.password;
@@ -87,47 +90,55 @@ export class UserLoginComponent implements OnDestroy {
   submit() {
     this.error = '';
     if (this.type === 0) {
-      this.userName.markAsDirty();
-      this.userName.updateValueAndValidity();
+      this.username.markAsDirty();
+      this.username.updateValueAndValidity();
       this.password.markAsDirty();
       this.password.updateValueAndValidity();
-      if (this.userName.invalid || this.password.invalid) return;
+      if (this.username.invalid || this.password.invalid) {
+        return;
+      }
     } else {
       this.mobile.markAsDirty();
       this.mobile.updateValueAndValidity();
       this.captcha.markAsDirty();
       this.captcha.updateValueAndValidity();
-      if (this.mobile.invalid || this.captcha.invalid) return;
+      if (this.mobile.invalid || this.captcha.invalid) {
+        return;
+      }
     }
     // mock http
     this.loading = true;
-    setTimeout(() => {
-      this.loading = false;
-      if (this.type === 0) {
-        if (
-          this.userName.value !== 'admin' ||
-          this.password.value !== '888888'
-        ) {
-          this.error = `账户或密码错误`;
-          return;
-        }
-      }
-
-      // 清空路由复用信息
-      this.reuseTabService.clear();
-      // 设置Token信息
-      this.tokenService.set({
-        token: '123456789',
-        name: this.userName.value,
-        email: `cipchk@qq.com`,
-        id: 10000,
-        time: +new Date(),
-      });
-      // 重新获取 StartupService 内容，若其包括 User 有关的信息的话
-      // this.startupSrv.load().then(() => this.router.navigate(['/']));
-      // 否则直接跳转
-      this.router.navigate(['/']);
-    }, 1000);
+    this.user
+      .login(this.form.value)
+      .pipe(
+        tap((res: any) => {
+          this.loading = false;
+          if (res.code === 0) {
+            this.msg.success(res.msg);
+          } else {
+            this.error = res.msg;
+            this.msg.error(res.msg);
+          }
+        }),
+        filter((res: any) => {
+          return res.code === 0;
+        }),
+        map(res => res.data),
+        tap(res => {
+          this.reuseTabService.clear();
+          this.tokenService.set({
+            token: res.token,
+            name: this.username.value,
+            email: res.mobile || '未填写',
+            id: res.uid,
+            time: +new Date(),
+          });
+          // this.settingsService.setUser(res);
+          this.startupSrv.load();
+          this.router.navigate(['/']);
+        }),
+      )
+      .subscribe();
   }
 
   // region: social

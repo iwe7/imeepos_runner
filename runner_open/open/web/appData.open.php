@@ -1,13 +1,29 @@
-{
-  "app": {
-    "name": "小明跑腿",
-    "description": "小明同城跑腿系统"
-  },
-  "user": {
-    "name": "Admin",
-    "avatar": "./assets/_/img/avatar.jpg",
-    "email": "admin@meepo.com.cn"
-  },
+<?php
+global $_W, $_GPC;
+
+$app = array(
+    'name' => '小明跑腿',
+    "description" => '小明同城跑腿系统',
+);
+
+$user = array(
+    'name' => $_W['user']['name'] ? $_W['user']['name'] : '游客',
+    'avatar' => $_W['user']['avatar'] ? $_W['user']['avatar'] : './assets/_/img/avatar.jpg',
+    'email' => $_W['user']['mobile'] ? $_W['user']['mobile'] : '未填写',
+);
+
+$menu = array();
+$menu[] = array();
+$menu[] = array();
+
+die(json_encode(array(
+    'app' => $app,
+    'user' => $user,
+    'menu' => $menu,
+    "_w" => $_W['user'],
+)));
+
+$json = '{
   "menu": [{
       "text": "主导航",
       "i18n": "main_navigation",
@@ -352,3 +368,4 @@
     }
   ]
 }
+';

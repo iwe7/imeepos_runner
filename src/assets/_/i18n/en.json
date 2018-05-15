@@ -64,5 +64,7 @@
   "pro-user": "Account",
   "pro-login": "Login",
   "pro-register": "Register",
-  "pro-register-result": "Register Result"
+  "pro-register-result": "Register Result",
+  "tasks": "Tasks Manage",
+  "tasks_dashboard": "Tasks Dashboard"
 }

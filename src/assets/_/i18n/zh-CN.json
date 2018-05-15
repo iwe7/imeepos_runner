@@ -64,5 +64,7 @@
   "pro-user": "账户",
   "pro-login": "登录",
   "pro-register": "注册",
-  "pro-register-result": "注册结果"
+  "pro-register-result": "注册结果",
+  "tasks": "任务管理",
+  "tasks_dashboard": "任务概述"
 }
