@@ -26,6 +26,7 @@ export class I18NService implements AlainI18NService {
     private injector: Injector,
   ) {
     const defaultLan = settings.layout.lang || translate.getBrowserLang();
+    console.log(defaultLan);
     const lans = this._langs.map(item => item.code);
     this._default = lans.includes(defaultLan) ? defaultLan : lans[0];
     translate.addLangs(lans);
@@ -62,7 +63,7 @@ export class I18NService implements AlainI18NService {
   }
   /** 默认语言 */
   get defaultLang() {
-    return 'zh-CN';
+    return this._default || 'zh-CN';
   }
   /** 当前语言 */
   get currentLang() {

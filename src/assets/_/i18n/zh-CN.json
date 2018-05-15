@@ -66,5 +66,8 @@
   "pro-register": "注册",
   "pro-register-result": "注册结果",
   "tasks": "任务管理",
-  "tasks_dashboard": "任务概述"
+  "tasks_dashboard": "任务概述",
+  "user-setting": "用户设置",
+  "user-center": "个人中心",
+  "user-logout": "退出登录"
 }
