@@ -28,10 +28,32 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dashboard/v1', pathMatch: 'full' },
       { path: 'dashboard', redirectTo: 'dashboard/v1', pathMatch: 'full' },
-      { path: 'dashboard/v1', component: DashboardV1Component },
-      { path: 'dashboard/analysis', component: DashboardAnalysisComponent },
-      { path: 'dashboard/monitor', component: DashboardMonitorComponent },
-      { path: 'dashboard/workplace', component: DashboardWorkplaceComponent },
+      {
+        path: 'dashboard/v1',
+        component: DashboardV1Component,
+        data: { title: '仪表盘', titleI18n: 'dashboard_v1' },
+      },
+      {
+        path: 'dashboard/analysis',
+        component: DashboardAnalysisComponent,
+        data: { title: '分析页', titleI18n: 'dashboard_analysis' },
+      },
+      {
+        path: 'dashboard/monitor',
+        component: DashboardMonitorComponent,
+        data: {
+          title: '监控页',
+          titleI18n: 'dashboard_monitor',
+        },
+      },
+      {
+        path: 'dashboard/workplace',
+        component: DashboardWorkplaceComponent,
+        data: {
+          title: '工作台',
+          titleI18n: 'dashboard_workplace',
+        },
+      },
       {
         path: 'widgets',
         loadChildren: './widgets/widgets.module#WidgetsModule',

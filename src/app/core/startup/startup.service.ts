@@ -35,7 +35,6 @@ export class StartupService {
     const url = this.injector.get(UrlService);
     this.httpClient
       .get(url.getWebOpen('web/appData'))
-      .pipe(tap(res => console.log(res)))
       .subscribe((res: any) => {
         // 应用信息：包括站点名、描述、年份
         this.settingService.setApp(res.app);
