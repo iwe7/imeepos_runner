@@ -25,8 +25,31 @@ $menu[] = array(
     'text' => '权限管理',
     "group" => true,
     "acl" => "founder",
+    "children" => array(
+        array(
+            "text" => '角色组',
+            "link" => '/role/group',
+        ),
+        array(
+            "text" => '权限设置',
+            'link' => '/role/setting',
+        ),
+    ),
 );
-$menu[] = array();
+$menu[] = array(
+    'text' => 'bug反馈',
+    "group" => true,
+    "children" => array(
+        array(
+            "text" => 'bug反馈',
+            "link" => '/bug/post',
+        ),
+        array(
+          "text" => 'bug进度',
+          "link" => '/bug/log',
+      ),
+    ),
+);
 
 die(json_encode(array(
     'app' => $app,
