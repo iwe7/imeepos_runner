@@ -19,7 +19,6 @@ export class NoticeService {
         map((res: any) => res.data)
       )
       .subscribe(res => {
-        console.log('load notice');
         this.list = res;
         this.loading = false;
       });

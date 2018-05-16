@@ -42,7 +42,7 @@ export class NotifyService {
   loadData() {
     this.http
       .post(
-        'https://meepo.com.cn/app/index.php?i=41&c=entry&do=open&open=web/notify/get&m=runner_open',
+        'https://meepo.com.cn/app/index.php?i=41&c=entry&do=open&open=web/notify/list&m=runner_open',
         {
           site: location.hostname,
         },

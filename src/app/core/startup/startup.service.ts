@@ -53,6 +53,9 @@ export class StartupService {
             this.settingService.setApp(res.app);
             this.settingService.setUser(res.user);
             this.aclService.setRole(res.user.role);
+            if (res.user.role === 'founder') {
+              this.aclService.setFull(true);
+            }
             const acs = res.accounts;
             const accounts = [];
             for (const key in acs) {
