@@ -1,65 +1,31 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'header-task',
   template: `
   <nz-dropdown nzTrigger="click" nzPlacement="bottomRight" (nzVisibleChange)="change()">
     <div class="item" nz-dropdown>
-      <nz-badge [nzDot]="true">
+      <nz-badge [nzDot]="dot">
         <i class="anticon anticon-bell"></i>
       </nz-badge>
     </div>
-    <div nz-menu class="wd-lg">
-      <nz-card nzTitle="Notifications" [nzLoading]="loading" class="ant-card__body-nopadding">
+    <div nz-menu class="wd-lg" style="min-width: 240px;">
+      <nz-card nzTitle="消息提醒" [nzLoading]="loading" class="ant-card__body-nopadding">
         <ng-template #extra><i class="anticon anticon-plus"></i></ng-template>
-        <div nz-row [nzType]="'flex'" [nzJustify]="'center'" [nzAlign]="'middle'" class="py-sm bg-grey-lighter-h point">
+        <div nz-row *ngFor="let item of list" [nzType]="'flex'" [nzJustify]="'center'" [nzAlign]="'middle'" class="py-sm bg-grey-lighter-h point">
           <div nz-col [nzSpan]="4" class="text-center">
-            <nz-avatar [nzSrc]="'./assets/_/img/1.png'"></nz-avatar>
+            <nz-avatar [nzSrc]="item.avatar"></nz-avatar>
           </div>
           <div nz-col [nzSpan]="20">
-            <strong>cipchk</strong>
-            <p class="mb0">Please tell me what happened in a few words, don't go into details.</p>
+            <strong>{{item.title}}</strong>
+            <p class="mb0">{{item.desc}}</p>
           </div>
         </div>
-        <div nz-row [nzType]="'flex'" [nzJustify]="'center'" [nzAlign]="'middle'" class="py-sm bg-grey-lighter-h point">
-          <div nz-col [nzSpan]="4" class="text-center">
-            <nz-avatar [nzSrc]="'./assets/_/img/2.png'"></nz-avatar>
-          </div>
-          <div nz-col [nzSpan]="20">
-            <strong>はなさき</strong>
-            <p class="mb0">ハルカソラトキヘダツヒカリ </p>
-          </div>
-        </div>
-        <div nz-row [nzType]="'flex'" [nzJustify]="'center'" [nzAlign]="'middle'" class="py-sm bg-grey-lighter-h point">
-          <div nz-col [nzSpan]="4" class="text-center">
-            <nz-avatar [nzSrc]="'./assets/_/img/3.png'"></nz-avatar>
-          </div>
-          <div nz-col [nzSpan]="20">
-            <strong>苏先生</strong>
-            <p class="mb0">请告诉我，我应该说点什么好？</p>
-          </div>
-        </div>
-        <div nz-row [nzType]="'flex'" [nzJustify]="'center'" [nzAlign]="'middle'" class="py-sm bg-grey-lighter-h point">
-          <div nz-col [nzSpan]="4" class="text-center">
-            <nz-avatar [nzSrc]="'./assets/_/img/4.png'"></nz-avatar>
-          </div>
-          <div nz-col [nzSpan]="20">
-            <strong>Kent</strong>
-            <p class="mb0">Please tell me what happened in a few words, don't go into details.</p>
-          </div>
-        </div>
-        <div nz-row [nzType]="'flex'" [nzJustify]="'center'" [nzAlign]="'middle'" class="py-sm bg-grey-lighter-h point">
-          <div nz-col [nzSpan]="4" class="text-center">
-            <nz-avatar [nzSrc]="'./assets/_/img/5.png'"></nz-avatar>
-          </div>
-          <div nz-col [nzSpan]="20">
-            <strong>Jefferson</strong>
-            <p class="mb0">Please tell me what happened in a few words, don't go into details.</p>
-          </div>
-        </div>
-        <div nz-row class="pt-lg pb-lg">
+        <div class="empty">暂无内容</div>
+        <div nz-row (click)="allTasks()" class="pt-lg pb-lg" style="height: 40px;line-height: 40px;">
           <div nz-col [nzSpan]="24" class="border-top-1 text-center text-grey point">
-            See All
+            查看所有
           </div>
         </div>
       </nz-card>
@@ -68,7 +34,17 @@ import { Component } from '@angular/core';
   `,
 })
 export class HeaderTaskComponent {
-  loading = true;
+  loading: boolean = true;
+  dot: boolean = false;
+
+  list: any[] = [];
+
+  constructor(public router: Router) {}
+
+  // 所有代办
+  allTasks() {
+    this.router.navigateByUrl('/notice/list');
+  }
 
   change() {
     setTimeout(() => (this.loading = false), 500);
