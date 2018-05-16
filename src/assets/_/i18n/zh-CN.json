@@ -69,5 +69,7 @@
   "tasks_dashboard": "任务概述",
   "user-setting": "用户设置",
   "user-center": "个人中心",
-  "user-logout": "退出登录"
+  "user-logout": "退出登录",
+  "user-upgrade": "自动更新",
+  "clear-cache": "更新缓存"
 }

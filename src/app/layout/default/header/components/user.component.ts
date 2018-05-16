@@ -15,7 +15,10 @@ import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
       <div nz-menu-item (click)="userCenter()"><i class="anticon anticon-user mr-sm"></i>{{'user-center'|translate}}</div>
       <div nz-menu-item (click)="userSetting()"><i class="anticon anticon-setting mr-sm"></i>{{'user-setting'|translate}}</div>
       <li nz-menu-divider></li>
-      <div nz-menu-item (click)="logout()"><i class="anticon anticon-setting mr-sm"></i>{{'user-logout'|translate}}</div>
+      <div nz-menu-item (click)="userUpgrade()"><i class="anticon anticon-cloud-download-o mr-sm"></i>{{'user-upgrade'|translate}}</div>
+      <div nz-menu-item (click)="clearCache()"><i class="anticon anticon-hourglass mr-sm"></i>{{'clear-cache'|translate}}</div>
+      <li nz-menu-divider></li>
+      <div nz-menu-item (click)="logout()"><i class="anticon anticon-logout mr-sm"></i>{{'user-logout'|translate}}</div>
     </div>
   </nz-dropdown>
   `,
@@ -43,6 +46,14 @@ export class HeaderUserComponent implements OnInit {
 
   userCenter() {
     this.router.navigateByUrl('/user/center');
+  }
+
+  userUpgrade() {
+    location.href = './index.php?c=cloud&a=upgrade&';
+  }
+
+  clearCache() {
+    location.href = './index.php?c=system&a=updatecache&';
   }
 
   userSetting() {

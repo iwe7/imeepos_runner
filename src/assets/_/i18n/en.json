@@ -66,5 +66,10 @@
   "pro-register": "Register",
   "pro-register-result": "Register Result",
   "tasks": "Tasks Manage",
-  "tasks_dashboard": "Tasks Dashboard"
+  "tasks_dashboard": "Tasks Dashboard",
+  "user-setting": "User Setting",
+  "user-center": "User Center",
+  "user-logout": "Logout",
+  "user-upgrade": "Upgrade",
+  "clear-cache": "Clear Cache"
 }

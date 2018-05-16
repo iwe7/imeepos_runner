@@ -29,7 +29,7 @@ export class HeaderNotifyComponent {
       clearText: '清空通知',
     },
     {
-      title: '消息',
+      title: '系统消息',
       list: [],
       emptyText: '您已读完所有消息',
       emptyImage:
@@ -37,7 +37,7 @@ export class HeaderNotifyComponent {
       clearText: '清空消息',
     },
     {
-      title: '待办',
+      title: 'bug及更新',
       list: [],
       emptyText: '你已完成所有待办',
       emptyImage:
@@ -74,8 +74,6 @@ export class HeaderNotifyComponent {
   }
 
   loadData() {
-    if (this.loading) return;
-    this.loading = true;
     setTimeout(() => {
       this.data = this.updateNoticeData([
         {
@@ -181,7 +179,6 @@ export class HeaderNotifyComponent {
           type: '待办',
         },
       ]);
-
       this.loading = false;
     }, 1000);
   }
