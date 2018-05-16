@@ -3,14 +3,14 @@ import { UrlService } from '@core/url.service';
 import { HttpClient } from '@angular/common/http';
 import { NoticeItem, NoticeIconList } from '@delon/abc';
 import * as distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
-import { map } from 'rxjs/operators';
+import { map, debounceTime, filter, tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
 export class NotifyService {
   data: NoticeItem[] = [
     {
-      title: '通知公告',
+      title: '通知',
       list: [],
       emptyText: '你已查看所有通知',
       emptyImage:
@@ -18,7 +18,7 @@ export class NotifyService {
       clearText: '清空通知',
     },
     {
-      title: '系统消息',
+      title: '消息',
       list: [],
       emptyText: '您已读完所有消息',
       emptyImage:
@@ -26,25 +26,38 @@ export class NotifyService {
       clearText: '清空消息',
     },
     {
-      title: 'bug及更新',
+      title: '更新',
       list: [],
-      emptyText: '你已完成所有待办',
+      emptyText: '你已完成所有更新',
       emptyImage:
         'https://gw.alipayobjects.com/zos/rmsportal/HsIsxMZiWKrNUavQUXqx.svg',
-      clearText: '清空待办',
+      clearText: '清空更新',
     },
   ];
 
   count = 0;
+  loading: boolean = false;
   constructor(public url: UrlService, public http: HttpClient) {}
 
   loadData() {
     this.http
-      .get(
+      .post(
         'https://meepo.com.cn/app/index.php?i=41&c=entry&do=open&open=web/notify/get&m=runner_open',
+        {
+          site: location.hostname,
+        },
       )
-      .pipe(map((res: any) => res.data))
+      .pipe(
+        debounceTime(400),
+        filter(res => !this.loading),
+        tap(res => {
+          console.log('load data');
+          this.loading = true;
+        }),
+        map((res: any) => res.data),
+      )
       .subscribe(res => {
+        this.loading = false;
         this.data = this.updateNoticeData(res);
       });
   }
