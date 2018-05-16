@@ -27,10 +27,6 @@ $menu[] = array(
     "acl" => "founder",
     "children" => array(
         array(
-            "text" => '角色组',
-            "link" => '/role/group',
-        ),
-        array(
             "text" => '权限设置',
             'link' => '/role/setting',
         ),
@@ -43,11 +39,7 @@ $menu[] = array(
         array(
             "text" => 'bug反馈',
             "link" => '/bug/post',
-        ),
-        array(
-          "text" => 'bug进度',
-          "link" => '/bug/log',
-      ),
+        )
     ),
 );
 

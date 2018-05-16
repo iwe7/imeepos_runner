@@ -11,6 +11,7 @@ import { UrlService } from '@core/url.service';
 })
 export class CenterComponent implements OnInit {
   accounts: any[] = [];
+  loading: boolean = false;
   constructor(
     public setting: SettingsService,
     public account: AccountService,
