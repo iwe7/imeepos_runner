@@ -13,14 +13,13 @@ import { NotifyService } from '@core/notify.service';
   <notice-icon
     [data]="notify.data"
     [count]="notify.count"
-    [loading]="loading"
+    [loading]="notify.loading"
     (select)="select($event)"
     (clear)="clear($event)"
     (popoverVisibleChange)="notify.loadData()"></notice-icon>
   `,
 })
 export class HeaderNotifyComponent {
-  loading = false;
   constructor(private msg: NzMessageService, private notify: NotifyService) {}
   clear(type: string) {
     this.msg.success(`清空了 ${type}`);

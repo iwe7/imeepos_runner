@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NoticeService } from '@core/notice.service';
 
@@ -34,10 +34,10 @@ import { NoticeService } from '@core/notice.service';
   </nz-dropdown>
   `,
 })
-export class HeaderTaskComponent {
-
-
+export class HeaderTaskComponent implements OnInit {
   constructor(public router: Router, public notice: NoticeService) {}
+
+  ngOnInit() {}
 
   // 所有代办
   allTasks() {
@@ -45,6 +45,7 @@ export class HeaderTaskComponent {
   }
 
   change() {
-    setTimeout(() => (this.notice.loading = false), 500);
+    console.log('change');
+    this.notice.loadData();
   }
 }

@@ -36,7 +36,7 @@ export class NotifyService {
   ];
 
   count = 0;
-  loading: boolean = false;
+  loading: boolean = true;
   constructor(public url: UrlService, public http: HttpClient) {}
 
   loadData() {
@@ -49,9 +49,7 @@ export class NotifyService {
       )
       .pipe(
         debounceTime(400),
-        filter(res => !this.loading),
         tap(res => {
-          console.log('load data');
           this.loading = true;
         }),
         map((res: any) => res.data),
