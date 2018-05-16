@@ -16,7 +16,7 @@ import { NotifyService } from '@core/notify.service';
     [loading]="loading"
     (select)="select($event)"
     (clear)="clear($event)"
-    (popoverVisibleChange)="loadData()"></notice-icon>
+    (popoverVisibleChange)="notify.loadData()"></notice-icon>
   `,
 })
 export class HeaderNotifyComponent {
