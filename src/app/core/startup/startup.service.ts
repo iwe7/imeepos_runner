@@ -2,7 +2,7 @@ import { Injectable, Injector, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { zip } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, tap, map } from 'rxjs/operators';
 import {
   MenuService,
   SettingsService,
@@ -36,9 +36,9 @@ export class StartupService {
     return new Promise((resolve, reject) => {
       const url = this.injector.get(UrlService);
       zip(
-        this.httpClient.get(
-          url.getWebOpen(`web/i18n/${this.i18n.defaultLang}`),
-        ),
+        this.httpClient
+          .get(url.getWebOpen(`web/i18n/${this.i18n.defaultLang}`))
+          .pipe(map(res => res.data)),
         this.httpClient.get(url.getWebOpen('web/appData')),
       )
         .pipe(

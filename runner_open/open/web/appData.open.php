@@ -22,7 +22,7 @@ $accounts = getAccountList();
 
 $menu = array();
 $menu[] = array(
-    'text' => '权限管理',
+    'text' => '站长特权',
     "group" => true,
     "acl" => "founder",
     "children" => array(
