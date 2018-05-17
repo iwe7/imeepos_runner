@@ -38,7 +38,7 @@ export class StartupService {
       zip(
         this.httpClient
           .get(url.getWebOpen(`web/i18n/${this.i18n.defaultLang}`))
-          .pipe(map(res => res.data)),
+          .pipe(map((res: any) => res.data)),
         this.httpClient.get(url.getWebOpen('web/appData')),
       )
         .pipe(

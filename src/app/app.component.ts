@@ -2,7 +2,7 @@ import { Component, HostBinding, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { SettingsService, TitleService } from '@delon/theme';
 import { filter } from 'rxjs/operators';
-
+import { Compiler } from '@angular/core';
 @Component({
   selector: 'app-root',
   template: `<router-outlet></router-outlet>`,
