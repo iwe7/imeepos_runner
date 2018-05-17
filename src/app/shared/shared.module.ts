@@ -15,6 +15,7 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { CountdownModule } from 'ngx-countdown';
 import { UEditorModule } from 'ngx-ueditor';
 import { NgxTinymceModule } from 'ngx-tinymce';
+import { GetElementRefDirective } from '@shared/get-element-ref';
 
 const THIRDMODULES = [
   NgZorroAntdModule,
@@ -26,7 +27,9 @@ const THIRDMODULES = [
 
 // region: your componets & directives
 const COMPONENTS = [];
-const DIRECTIVES = [];
+const DIRECTIVES = [
+  GetElementRefDirective
+];
 // endregion
 
 @NgModule({

@@ -1,0 +1,33 @@
+td {
+    border-right: 1px solid #e8e8e8;
+    padding: 0px !important;
+    margin: 0px !important;
+    line-height: 1;
+    &.active {
+        background: #efefef !important;
+        color: #000;
+    }
+    &:hover{
+      .td-mark{
+        display: flex;
+      }
+    }
+}
+
+.td-container {
+    position: relative;
+    height: 90px;
+    width: 100%;
+    .td-mark {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        background-color: rgba(0, 0, 0, .5);
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}

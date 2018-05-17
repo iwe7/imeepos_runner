@@ -67,6 +67,7 @@ const routes: Routes = [
       { path: 'role', loadChildren: './role/role.module#RoleModule' },
       { path: 'bug', loadChildren: './bug/bug.module#BugModule' },
       { path: 'notice', loadChildren: './notice/notice.module#NoticeModule' },
+      { path: 'coach', loadChildren: './coach/coach.module#CoachModule' },
     ],
   },
   // 全屏布局

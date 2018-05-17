@@ -1,0 +1,24 @@
+<nz-table #basicTable nzSize="middle" [nzScroll]="{x:'4860px'}" [nzData]="tables" nzPageSize="24" nzShowPagination="false">
+  <thead>
+    <tr>
+      <th nzWidth="60px" [nzLeft]="nzLeft"></th>
+      <th nzWidth="200px" *ngFor="let item of dataSet;index as i;">{{item}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="height: 100px;" *ngFor="let data of dataWeek;index as i;">
+      <td [nzLeft]="nzLeft">{{data}}</td>
+      <td [attr.colspan]="item.colspan" (click)="selectStartOrEnd(i,j)" [attr.data-x]="i" [attr.data-y]="j" [class.active]="item.colspan > 1"
+        *ngFor="let item of tables[i].list;index as j;">
+        <div class="td-container">
+          <p></p>
+          <div class="td-mark" *ngIf="item.colspan > 1">
+            <a [style.color]="'#fff'" (click)="addLesson($event,item)">
+              <i class="anticon anticon-plus"></i>
+            </a>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

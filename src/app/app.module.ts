@@ -1,4 +1,10 @@
-import { NgModule, LOCALE_ID, APP_INITIALIZER, Injector, Compiler } from '@angular/core';
+import {
+  NgModule,
+  LOCALE_ID,
+  APP_INITIALIZER,
+  Injector,
+  Compiler,
+} from '@angular/core';
 import {
   HttpClient,
   HTTP_INTERCEPTORS,
@@ -19,7 +25,7 @@ import { SimpleInterceptor } from '@delon/auth';
 // angular i18n
 import { registerLocaleData } from '@angular/common';
 import localeZhHans from '@angular/common/locales/zh-Hans';
-registerLocaleData(localeZhHans);
+registerLocaleData(localeZhHans, 'zh-cn');
 // i18n
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -30,10 +36,11 @@ import { UEditorModule } from 'ngx-ueditor';
 import { NgxTinymceModule } from 'ngx-tinymce';
 // @delon/form: JSON Schema form
 import { JsonSchemaModule } from '@shared/json-schema/json-schema.module';
+import { UrlService } from '@core/url.service';
 
 // AoT requires an exported function for factories
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, `assets/_/i18n/`, '.json');
+export function HttpLoaderFactory(http: HttpClient, url: UrlService) {
+  return new TranslateHttpLoader(http, `${url.getOpenUrl('web/i18n/')}`, '');
 }
 
 export function StartupServiceFactory(
@@ -58,7 +65,7 @@ export function StartupServiceFactory(
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
-        deps: [HttpClient],
+        deps: [HttpClient, UrlService],
       },
     }),
     // thirds
@@ -89,7 +96,7 @@ export function StartupServiceFactory(
       useFactory: StartupServiceFactory,
       deps: [StartupService],
       multi: true,
-    }
+    },
   ],
   bootstrap: [AppComponent],
 })

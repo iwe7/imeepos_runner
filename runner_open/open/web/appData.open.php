@@ -22,6 +22,16 @@ $accounts = getAccountList();
 
 $menu = array();
 $menu[] = array(
+  'text' => '健身房',
+  "group" => true,
+  "children" => array(
+      array(
+          "text" => '课程表',
+          'link' => '/coach/list',
+      ),
+  ),
+);
+$menu[] = array(
     'text' => '站长特权',
     "group" => true,
     "acl" => "founder",
