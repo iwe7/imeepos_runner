@@ -171,7 +171,7 @@ class Runner_openModuleSite extends WeModuleSite
     {
         global $_W, $_GPC;
         $this->checkWebDo("index");
-        include $this->template('web/index');
+        include $this->template('webv20/index');
     }
     public function doWeblogin()
     {

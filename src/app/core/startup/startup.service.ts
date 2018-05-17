@@ -36,7 +36,9 @@ export class StartupService {
     return new Promise((resolve, reject) => {
       const url = this.injector.get(UrlService);
       zip(
-        this.httpClient.get(`assets/_/i18n/${this.i18n.defaultLang}.json`),
+        this.httpClient.get(
+          url.getWebOpen(`web/i18n/${this.i18n.defaultLang}`),
+        ),
         this.httpClient.get(url.getWebOpen('web/appData')),
       )
         .pipe(
