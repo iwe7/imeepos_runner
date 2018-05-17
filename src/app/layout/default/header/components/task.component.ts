@@ -7,7 +7,7 @@ import { NoticeService } from '@core/notice.service';
   template: `
   <nz-dropdown nzTrigger="click" nzPlacement="bottomRight" (nzVisibleChange)="change()">
     <div class="item" nz-dropdown>
-      <nz-badge [nzDot]="dot">
+      <nz-badge [nzDot]="notice.dot">
         <i class="anticon anticon-bell"></i>
       </nz-badge>
     </div>

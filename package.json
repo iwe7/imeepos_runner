@@ -17,6 +17,7 @@
     "ng": "ng",
     "start": "ng serve -o",
     "build": "ng build --prod --build-optimizer --source-map=true",
+    "we7": "ng build --prod --build-optimizer --source-map=true --deploy-url=../../addons/runner_open/webv20/",
     "analyze": "ng build --prod --build-optimizer --stats-json",
     "lint": "npm run lint:ts && npm run lint:style",
     "lint:ts": "ng lint",

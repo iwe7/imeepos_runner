@@ -20,7 +20,7 @@ import { NotifyService } from '@core/notify.service';
   `,
 })
 export class HeaderNotifyComponent {
-  constructor(private msg: NzMessageService, private notify: NotifyService) {}
+  constructor(private msg: NzMessageService, public notify: NotifyService) {}
   clear(type: string) {
     this.msg.success(`清空了 ${type}`);
   }
