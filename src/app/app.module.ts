@@ -25,7 +25,7 @@ import { SimpleInterceptor } from '@delon/auth';
 // angular i18n
 import { registerLocaleData } from '@angular/common';
 import localeZhHans from '@angular/common/locales/zh-Hans';
-registerLocaleData(localeZhHans, 'zh-cn');
+registerLocaleData(localeZhHans, 'zh-Hans');
 // i18n
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';

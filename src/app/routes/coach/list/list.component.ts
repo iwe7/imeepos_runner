@@ -6,6 +6,22 @@ import {
   ModalOptionsForService,
   NzModalRef,
 } from 'ng-zorro-antd';
+
+export interface CoachItemInter {
+  // 开始时间
+  start: number;
+  // 结束时间
+  end: number;
+  // 长度
+  colspan: number;
+  // 数据
+  list: any[];
+}
+
+export interface CoachTableInter {
+  name: string;
+  list: CoachItemInter[];
+}
 import { max, min, remove, toInteger, add } from 'lodash';
 @Component({
   selector: 'list',
@@ -16,16 +32,25 @@ export class ListComponent implements OnInit {
   dataSet = [];
   dataWeek = ['日', '一', '二', '三', '四', '五', '六'];
   nzLeft: string = '0px';
-  tables: any[] = [];
+  tables: CoachTableInter[] = [];
+
   constructor(public modalControl: NzModalService) {
-    for (let i = 0; i < this.dataWeek.length; i++) {
-      this.tables[i] = {
-        week: this.dataWeek[i],
+    for (let j = 0; j < this.dataWeek.length; j++) {
+      this.tables.push({
+        name: this.dataWeek[j],
         list: [],
-      };
+      });
+      for (let i = 0; i < 48; i++) {
+        this.tables[j].list.push({
+          start: i * 30,
+          end: (i + 1) * 30,
+          colspan: 1,
+          list: [],
+        });
+      }
     }
     for (let i = 0; i < 24; i++) {
-      this.getNumber(i);
+      this.dataSet = [...this.dataSet, ...this.getNumber(i)];
     }
   }
 
@@ -36,23 +61,9 @@ export class ListComponent implements OnInit {
   getNumber(i: number) {
     const num1 = i < 10 ? '0' + i + ':00' : i + ':00';
     const num2 = i < 10 ? '0' + i + ':30' : i + ':30';
-    for (let j = 0; j < this.dataWeek.length; j++) {
-      this.tables[j].list.push({
-        name: num1,
-        colspan: 1,
-        list: [],
-      });
-      this.tables[j].list.push({
-        name: num2,
-        colspan: 1,
-        list: [],
-      });
-    }
-    this.dataSet.push(num1);
-    this.dataSet.push(num2);
+    return [num1, num2];
   }
   modal: NzModalRef<any>;
-
   // start
   isStart: boolean = false;
   start: any = { x: 0, y: 0 };
@@ -75,7 +86,6 @@ export class ListComponent implements OnInit {
         this.tables[this.start.x].list[this.start.y].colspan = colspan;
       }
       this.isStart = false;
-      this.udpateTable(this.start.x);
     }
   }
 
@@ -93,61 +103,13 @@ export class ListComponent implements OnInit {
     this.modal = this.modalControl.create(options);
   }
 
-  udpateTable(x: number) {
-    const list = this.tables[x].list;
-    this.startTableNumber = 0;
-    for (const key in list) {
-      const item = list[key];
-      this.getName(item);
-    }
-    console.log(this.tables[x].list);
-  }
-  startTableNumber = 0;
-  getName(item: any) {
-    const start = this.startTableNumber;
-    const time = 30 * item.colspan / 60 + '';
-    const times = time.split('.');
-    if (times.length === 1) {
-      times.push('0');
-    }
-    this.startTableNumber = add(toInteger(start), toInteger(times[0]));
-    if (this.startTableNumber < 10) {
-      item.name = `0${this.startTableNumber}:${
-        times[1] + '' === '0' ? '00' : '30'
-      }`;
-    } else {
-      item.name = `${this.startTableNumber}:${
-        times[1] + '' === '0' ? '00' : '30'
-      }`;
-    }
-  }
-
   deleteLesson(e: MouseEvent, item: any, x: number, y: number) {
     e.preventDefault();
     e.stopPropagation();
     const { colspan, name } = item;
     const names = name.split(':');
     const items: any[] = [];
-    for (let i = y + 1; i < colspan + y; i++) {
-      items.push({
-        name: this.getNextName(names),
-        list: [],
-        colspan: 1,
-      });
-    }
     this.tables[x].list.splice(y, 1, ...items);
-    this.udpateTable(x);
-  }
-
-  getNextName(names: any[]) {
-    const n0 = names[0];
-    const n1 = names[1];
-    if (n1 + '' === '30') {
-      const n2 = toInteger(n0) + 1;
-      return n2 + ':00';
-    } else {
-      return n0 + ':30';
-    }
   }
 
   manageLesson(e: MouseEvent, item: any) {

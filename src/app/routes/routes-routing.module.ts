@@ -68,6 +68,7 @@ const routes: Routes = [
       { path: 'bug', loadChildren: './bug/bug.module#BugModule' },
       { path: 'notice', loadChildren: './notice/notice.module#NoticeModule' },
       { path: 'coach', loadChildren: './coach/coach.module#CoachModule' },
+      { path: 'runner', loadChildren: './runner/runner.module#RunnerModule' },
     ],
   },
   // 全屏布局

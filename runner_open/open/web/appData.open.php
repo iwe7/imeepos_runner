@@ -22,14 +22,51 @@ $accounts = getAccountList();
 
 $menu = array();
 $menu[] = array(
-  'text' => '健身房',
-  "group" => true,
-  "children" => array(
-      array(
-          "text" => '课程表',
-          'link' => '/coach/list',
-      ),
-  ),
+    'text' => '同城配送',
+    "group" => true,
+    "children" => array(
+        array(
+            "text" => '任务',
+            'link' => '/runner/tasks',
+            'icon' => 'icon-list',
+        ),
+        array(
+            "text" => '跑腿',
+            'link' => '/runner/runners',
+            'icon' => 'icon-user',
+        ),
+        array(
+            "text" => '设置',
+            'link' => '/runner/setting',
+            'icon' => 'icon-settings',
+        ),
+    ),
+);
+$menu[] = array(
+    'text' => '健身房',
+    "group" => true,
+    "children" => array(
+        array(
+            "text" => '课程表',
+            'link' => '/coach/list',
+            "icon" => 'icon-list',
+        ),
+        array(
+            "text" => '教练',
+            'icon' => 'icon-user',
+            'link' => '/coach/teachers',
+        ),
+        array(
+            "text" => '预约',
+            'link' => '/coach/log',
+            'icon' => 'icon-shield',
+        ),
+        array(
+            "text" => '设置',
+            'link' => '/coach/setting',
+            'icon' => 'icon-settings',
+        ),
+    ),
 );
 $menu[] = array(
     'text' => '站长特权',
@@ -39,7 +76,13 @@ $menu[] = array(
         array(
             "text" => '权限设置',
             'link' => '/role/setting',
+            'icon' => 'icon-settings',
         ),
+        array(
+          "text" => '系统设置',
+          'link' => '/system/setting',
+          'icon' => 'icon-settings',
+      ),
     ),
 );
 $menu[] = array(
@@ -49,7 +92,8 @@ $menu[] = array(
         array(
             "text" => 'bug反馈',
             "link" => '/bug/post',
-        )
+            'icon' => 'icon-refresh',
+        ),
     ),
 );
 
