@@ -7,14 +7,20 @@
   </thead>
   <tbody>
     <tr style="height: 100px;" *ngFor="let data of dataWeek;index as i;">
-      <td [nzLeft]="nzLeft">{{data}}</td>
+      <td [nzLeft]="nzLeft" style="text-align: center;">{{data}}</td>
       <td [attr.colspan]="item.colspan" (click)="selectStartOrEnd(i,j)" [attr.data-x]="i" [attr.data-y]="j" [class.active]="item.colspan > 1"
         *ngFor="let item of tables[i].list;index as j;">
         <div class="td-container">
           <p></p>
           <div class="td-mark" *ngIf="item.colspan > 1">
-            <a [style.color]="'#fff'" (click)="addLesson($event,item)">
+            <a [style.color]="'#fff'" class="mark-opt" (click)="addLesson($event,item)">
               <i class="anticon anticon-plus"></i>
+            </a>
+            <a [style.color]="'#fff'" class="mark-opt" (click)="manageLesson($event,item)">
+              <i class="anticon anticon-database"></i>
+            </a>
+            <a [style.color]="'#fff'" class="mark-opt" (click)="deleteLesson($event,item,i,j)">
+              <i class="anticon anticon-close"></i>
             </a>
           </div>
         </div>

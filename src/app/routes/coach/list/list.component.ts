@@ -6,7 +6,7 @@ import {
   ModalOptionsForService,
   NzModalRef,
 } from 'ng-zorro-antd';
-import { max, min, remove } from 'lodash';
+import { max, min, remove, toInteger, add } from 'lodash';
 @Component({
   selector: 'list',
   templateUrl: './list.component.html',
@@ -66,22 +66,22 @@ export class ListComponent implements OnInit {
     } else {
       this.end.x = i;
       this.end.y = j;
-      let colspan = this.tables[this.start.x].list[this.start.y].colspan;
+      let colspan = 1;
       for (let i = this.start.y; i < this.end.y; i++) {
         colspan += this.tables[this.start.x].list[i].colspan;
         if (i !== this.start.x) {
           this.tables[this.start.x].list.splice(i, 1);
         }
+        this.tables[this.start.x].list[this.start.y].colspan = colspan;
       }
-      this.tables[this.start.x].list[this.start.y].colspan = colspan;
       this.isStart = false;
+      this.udpateTable(this.start.x);
     }
   }
 
   addLesson(e: MouseEvent, item: any) {
     e.preventDefault();
     e.stopPropagation();
-    console.log(item);
     const options: ModalOptionsForService = {
       nzOnOk: () => {
         this.modalControl.closeAll();
@@ -91,5 +91,68 @@ export class ListComponent implements OnInit {
       },
     };
     this.modal = this.modalControl.create(options);
+  }
+
+  udpateTable(x: number) {
+    const list = this.tables[x].list;
+    this.startTableNumber = 0;
+    for (const key in list) {
+      const item = list[key];
+      this.getName(item);
+    }
+    console.log(this.tables[x].list);
+  }
+  startTableNumber = 0;
+  getName(item: any) {
+    const start = this.startTableNumber;
+    const time = 30 * item.colspan / 60 + '';
+    const times = time.split('.');
+    if (times.length === 1) {
+      times.push('0');
+    }
+    this.startTableNumber = add(toInteger(start), toInteger(times[0]));
+    if (this.startTableNumber < 10) {
+      item.name = `0${this.startTableNumber}:${
+        times[1] + '' === '0' ? '00' : '30'
+      }`;
+    } else {
+      item.name = `${this.startTableNumber}:${
+        times[1] + '' === '0' ? '00' : '30'
+      }`;
+    }
+  }
+
+  deleteLesson(e: MouseEvent, item: any, x: number, y: number) {
+    e.preventDefault();
+    e.stopPropagation();
+    const { colspan, name } = item;
+    const names = name.split(':');
+    const items: any[] = [];
+    for (let i = y + 1; i < colspan + y; i++) {
+      items.push({
+        name: this.getNextName(names),
+        list: [],
+        colspan: 1,
+      });
+    }
+    this.tables[x].list.splice(y, 1, ...items);
+    this.udpateTable(x);
+  }
+
+  getNextName(names: any[]) {
+    const n0 = names[0];
+    const n1 = names[1];
+    if (n1 + '' === '30') {
+      const n2 = toInteger(n0) + 1;
+      return n2 + ':00';
+    } else {
+      return n0 + ':30';
+    }
+  }
+
+  manageLesson(e: MouseEvent, item: any) {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log(item);
   }
 }
