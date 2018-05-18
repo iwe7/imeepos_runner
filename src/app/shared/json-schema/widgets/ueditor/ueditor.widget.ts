@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ControlWidget } from '@delon/form';
 import { UrlService } from '@core/url.service';
+import { UEditorComponent } from 'ngx-ueditor';
+declare const UE: any;
 @Component({
   selector: 'sf-ueditor',
   template: `
@@ -9,7 +11,7 @@ import { UrlService } from '@core/url.service';
       [ngModel]="value"
       [config]="config"
       [loadingTip]="loading"
-      (ngModelChange)="change($event)">
+      (ngModelChange)="change($event)" (onPreReady)="onPreReady($event)">
     </ueditor>
   </sf-item-wrap>
   `,
@@ -23,8 +25,8 @@ export class UeditorWidget extends ControlWidget implements OnInit {
   _default: any;
   loading: string;
 
-  constructor(private url: UrlService){
-    super();
+  constructor(cd: ChangeDetectorRef, private url: UrlService) {
+    super(cd);
   }
 
   ngOnInit(): void {
@@ -34,10 +36,14 @@ export class UeditorWidget extends ControlWidget implements OnInit {
       ...{
         serverUrl: this.url.getWebOpen('web/ueditor/server'),
         imageUrl: this.url.getWebOpen('web/ueditor/image'),
-        imagePath: `${this.url.root}attachment/`,
+        imagePath: `${this.url.root}`,
         lang: 'zh-cn',
       },
     };
+  }
+
+  onPreReady(comp: UEditorComponent) {
+    // UE.plugin.register('simpleupload',()=>{});
   }
 
   change(value: string) {
