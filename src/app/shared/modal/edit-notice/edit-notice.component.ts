@@ -35,7 +35,6 @@ export class EditNoticeComponent {
   constructor(private modal: NzModalRef) {}
 
   submit(e: any) {
-    console.log(e);
-    this.modal.close(e);
+    this.modal.destroy(e);
   }
 }

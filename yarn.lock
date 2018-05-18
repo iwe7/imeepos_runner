@@ -451,7 +451,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/lodash@^4.14.108":
+"@types/lodash@^4.14.108", "@types/lodash@^4.14.64":
   version "4.14.108"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.108.tgz#02656af3add2e5b3174f830862c47421c00ef817"
 
@@ -3583,6 +3583,13 @@ duplexify@^3.4.2, duplexify@^3.6.0:
     readable-stream "^2.0.0"
     stream-shift "^1.0.0"
 
+e-ngx-editor@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/e-ngx-editor/-/e-ngx-editor-5.1.0.tgz#7175826deee7914c2161543a17647e6e38f68eac"
+  dependencies:
+    "@types/lodash" "^4.14.64"
+    lodash "^4.17.4"
+
 ecc-jsbn@~0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/ecc-jsbn/-/ecc-jsbn-0.1.1.tgz#0fc73a9ed5f0d53c38193398523ef7e543777505"
@@ -5845,11 +5852,29 @@ isurl@^1.0.0-alpha5:
     has-to-string-tag-x "^1.2.0"
     is-object "^1.0.1"
 
+iwe7-editor@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/iwe7-editor/-/iwe7-editor-0.1.2.tgz#38c6b41d32b3225aa52d05ef66eaa2c9f8eeb84e"
+  dependencies:
+    tslib "^1.9.0"
+
+iwe7-global@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/iwe7-global/-/iwe7-global-0.0.1.tgz#ce349b6e468c9f950e419b98a3bf95481edbcf6b"
+  dependencies:
+    tslib "^1.9.0"
+
 iwe7-http@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/iwe7-http/-/iwe7-http-1.0.0.tgz#9325e156e43fe0e499c20f30f702f2949929e635"
   dependencies:
     tslib "^1.7.1"
+
+iwe7-script@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/iwe7-script/-/iwe7-script-0.0.1.tgz#b515a5375109e8ba9e19731ad4609b022175a9d2"
+  dependencies:
+    tslib "^1.9.0"
 
 jasmine-core@~2.8.0:
   version "2.8.0"

@@ -1,32 +1,47 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { ControlWidget } from '@delon/form';
+import {
+  Component,
+  OnInit,
+  ChangeDetectorRef,
+  ViewChild,
+  AfterViewInit,
+} from '@angular/core';
+import { ControlWidget, SFComponent } from '@delon/form';
 import { UrlService } from '@core/url.service';
-import { UEditorComponent } from 'ngx-ueditor';
+import { UEditorComponent } from 'iwe7-editor';
 declare const UE: any;
 @Component({
   selector: 'sf-ueditor',
   template: `
   <sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
-    <ueditor
+    <neditor #editor
       [ngModel]="value"
-      [config]="config"
-      [loadingTip]="loading"
+      [option]="config"
       (ngModelChange)="change($event)" (onPreReady)="onPreReady($event)">
-    </ueditor>
+    </neditor>
   </sf-item-wrap>
   `,
   preserveWhitespaces: false,
   styles: [`:host ueditor { line-height:normal; }`],
 })
 // tslint:disable-next-line:component-class-suffix
-export class UeditorWidget extends ControlWidget implements OnInit {
+export class UeditorWidget extends ControlWidget
+  implements OnInit, AfterViewInit {
   static readonly KEY = 'ueditor';
   config: any = {};
   _default: any;
   loading: string;
 
-  constructor(cd: ChangeDetectorRef, private url: UrlService) {
-    super(cd);
+  @ViewChild('editor', {
+    read: UEditorComponent,
+  })
+  editor: UEditorComponent;
+
+  constructor(
+    cd: ChangeDetectorRef,
+    private url: UrlService,
+    public sf: SFComponent,
+  ) {
+    super(cd, sf);
   }
 
   ngOnInit(): void {
@@ -35,11 +50,13 @@ export class UeditorWidget extends ControlWidget implements OnInit {
       ...this.ui.config,
       ...{
         serverUrl: this.url.getWebOpen('web/ueditor/server'),
-        imageUrl: this.url.getWebOpen('web/ueditor/image'),
-        imagePath: `${this.url.root}`,
-        lang: 'zh-cn',
+        UEDITOR_HOME_URL: `${this.url.root}addons/runner_open/assets/neditor/`,
       },
     };
+  }
+
+  ngAfterViewInit() {
+    super.ngAfterViewInit();
   }
 
   onPreReady(comp: UEditorComponent) {

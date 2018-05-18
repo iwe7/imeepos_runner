@@ -13,10 +13,13 @@ import { TranslateModule } from '@ngx-translate/core';
 // region: third libs
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { CountdownModule } from 'ngx-countdown';
-import { UEditorModule } from 'ngx-ueditor';
+import { UEditorModule } from 'iwe7-editor';
 import { NgxTinymceModule } from 'ngx-tinymce';
 import { GetElementRefDirective } from '@shared/get-element-ref';
 import { EditNoticeComponent } from './modal/edit-notice/edit-notice.component';
+import { NeditorComponent } from './neditor/neditor.component';
+import { UiEditorComponent } from './neditor/ui-editor/ui-editor.component';
+import { EduiBoxComponent } from './neditor/edui-box/edui-box.component';
 
 const THIRDMODULES = [
   NgZorroAntdModule,
@@ -27,7 +30,7 @@ const THIRDMODULES = [
 // endregion
 
 // region: your componets & directives
-const COMPONENTS = [EditNoticeComponent];
+const COMPONENTS = [EditNoticeComponent, NeditorComponent, UiEditorComponent];
 const DIRECTIVES = [GetElementRefDirective];
 // endregion
 
@@ -48,6 +51,7 @@ const DIRECTIVES = [GetElementRefDirective];
     // your components
     ...COMPONENTS,
     ...DIRECTIVES,
+    EduiBoxComponent,
   ],
   exports: [
     CommonModule,
@@ -66,8 +70,6 @@ const DIRECTIVES = [GetElementRefDirective];
     ...COMPONENTS,
     ...DIRECTIVES,
   ],
-  entryComponents: [
-    EditNoticeComponent
-  ]
+  entryComponents: [EditNoticeComponent],
 })
 export class SharedModule {}

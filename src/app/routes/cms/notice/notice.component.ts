@@ -16,7 +16,7 @@ import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import { EditNoticeComponent } from '@shared/modal/edit-notice/edit-notice.component';
 import { SFSchema } from '@delon/form';
 import { UrlService } from '@core/url.service';
-import { filter, switchMap } from 'rxjs/operators';
+import { filter, switchMap, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'notice',
@@ -28,6 +28,10 @@ export class NoticeComponent implements OnInit {
   resReName: any = { list: 'data' };
   url: string = ``;
   @ViewChild('st') st: SimpleTableComponent;
+  config = {
+    serverUrl: this._url.getWebOpen('web/ueditor/server'),
+    UEDITOR_HOME_URL: `${this._url.root}addons/runner_open/assets/neditor/`,
+  };
   searchSchema: SFSchema = {
     properties: {
       id: {
@@ -113,6 +117,9 @@ export class NoticeComponent implements OnInit {
     });
     ref.afterClose
       .pipe(
+        tap(res => {
+          ref.destroy();
+        }),
         filter(res => !!res),
         switchMap(res => {
           return this.http.post(this._url.getWebOpen('web/cms/notice'), res, {
