@@ -1,0 +1,9 @@
+<page-header title="公告管理"></page-header>
+<nz-card>
+  <sf mode="search" [schema]="searchSchema" [formData]="params" (formSubmit)="st.reset($event)" (formReset)="st.reset(params)"></sf>
+  <simple-table #st [data]="url" [resReName]="resReName" [columns]="columns" [extraParams]="params"></simple-table>
+</nz-card>
+<button nz-button (click)="st.export()">导出数据</button>
+<button nz-button (click)="addNotice(tpl)">添加公告</button>
+
+<ng-template #tpl></ng-template>

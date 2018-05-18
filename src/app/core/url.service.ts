@@ -1,5 +1,6 @@
 import { Injectable, Inject, InjectionToken } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
 export const ENV = new InjectionToken('ENV', {
   providedIn: 'root',
   factory: () => {
@@ -10,7 +11,7 @@ export const ENV = new InjectionToken('ENV', {
     };
   },
 });
-
+import { getUrl } from './global';
 @Injectable({
   providedIn: 'root',
 })
@@ -20,6 +21,10 @@ export class UrlService {
     if (account) {
       this.env.i = account.uniacid;
     }
+  }
+
+  get root() {
+    return this.env.root;
   }
 
   setEnvRoot(root: string) {
@@ -32,32 +37,8 @@ export class UrlService {
     return this;
   }
 
-  serializeQueryParams(params: { [key: string]: any }): string {
-    const strParams: string[] = Object.keys(params).map(name => {
-      const value = params[name];
-      return Array.isArray(value)
-        ? value
-            .map(v => `${this.encodeUriQuery(name)}=${this.encodeUriQuery(v)}`)
-            .join('&')
-        : `${this.encodeUriQuery(name)}=${this.encodeUriQuery(value)}`;
-    });
-    return strParams.length ? `?${strParams.join('&')}` : '';
-  }
-
-  encodeUriQuery(s: string): string {
-    return this.encodeUriString(s).replace(/%3B/gi, ';');
-  }
-
-  encodeUriString(s: string): string {
-    return encodeURIComponent(s)
-      .replace(/%40/g, '@')
-      .replace(/%3A/gi, ':')
-      .replace(/%24/g, '$')
-      .replace(/%2C/gi, ',');
-  }
-
-  getUrl(_params: any = {}) {
-    return this.serializeQueryParams(_params);
+  getUrl(params: any = {}) {
+    return getUrl(params);
   }
 
   getMobileUrl(_do: string, _params: any = {}) {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ControlWidget } from '@delon/form';
-
+import { UrlService } from '@core/url.service';
 @Component({
   selector: 'sf-ueditor',
   template: `
@@ -9,7 +9,7 @@ import { ControlWidget } from '@delon/form';
       [ngModel]="value"
       [config]="config"
       [loadingTip]="loading"
-      (onContentChange)="change($event)">
+      (ngModelChange)="change($event)">
     </ueditor>
   </sf-item-wrap>
   `,
@@ -19,13 +19,25 @@ import { ControlWidget } from '@delon/form';
 // tslint:disable-next-line:component-class-suffix
 export class UeditorWidget extends ControlWidget implements OnInit {
   static readonly KEY = 'ueditor';
-
-  config: any;
+  config: any = {};
+  _default: any;
   loading: string;
+
+  constructor(private url: UrlService){
+    super();
+  }
 
   ngOnInit(): void {
     this.loading = this.ui.loading || '加载中……';
-    this.config = this.ui.config || {};
+    this.config = {
+      ...this.ui.config,
+      ...{
+        serverUrl: this.url.getWebOpen('web/ueditor/server'),
+        imageUrl: this.url.getWebOpen('web/ueditor/image'),
+        imagePath: `${this.url.root}attachment/`,
+        lang: 'zh-cn',
+      },
+    };
   }
 
   change(value: string) {

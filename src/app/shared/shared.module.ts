@@ -16,6 +16,7 @@ import { CountdownModule } from 'ngx-countdown';
 import { UEditorModule } from 'ngx-ueditor';
 import { NgxTinymceModule } from 'ngx-tinymce';
 import { GetElementRefDirective } from '@shared/get-element-ref';
+import { EditNoticeComponent } from './modal/edit-notice/edit-notice.component';
 
 const THIRDMODULES = [
   NgZorroAntdModule,
@@ -26,10 +27,8 @@ const THIRDMODULES = [
 // endregion
 
 // region: your componets & directives
-const COMPONENTS = [];
-const DIRECTIVES = [
-  GetElementRefDirective
-];
+const COMPONENTS = [EditNoticeComponent];
+const DIRECTIVES = [GetElementRefDirective];
 // endregion
 
 @NgModule({
@@ -67,5 +66,8 @@ const DIRECTIVES = [
     ...COMPONENTS,
     ...DIRECTIVES,
   ],
+  entryComponents: [
+    EditNoticeComponent
+  ]
 })
 export class SharedModule {}

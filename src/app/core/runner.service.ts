@@ -13,4 +13,10 @@ export class RunnerService {
       .get(this.url.getOpenUrl('runner/list'), { params: param })
       .pipe(map((res: any) => res.data));
   }
+
+  getRunners(params: any) {
+    return this.http
+      .get(this.url.getOpenUrl('runner/runners'), { params: params })
+      .pipe(map((res: any) => res.data));
+  }
 }

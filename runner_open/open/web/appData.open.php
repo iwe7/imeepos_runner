@@ -21,6 +21,40 @@ $user = array(
 $accounts = getAccountList();
 
 $menu = array();
+
+$menu[] = array(
+    'text' => '会员管理',
+    'group' => 'true',
+    "children" => array(
+        array(
+            "text" => '粉丝',
+            'link' => '/member/fans',
+            'icon' => 'icon-list',
+        ),
+        array(
+            "text" => '会员',
+            'link' => '/member/members',
+            'icon' => 'icon-list',
+        ),
+    ),
+);
+
+$menu[] = array(
+    'text' => 'CMS系统',
+    'group' => 'true',
+    "children" => array(
+        array(
+            "text" => '新闻管理',
+            'link' => '/cms/list',
+            'icon' => 'icon-list',
+        ),
+        array(
+            "text" => '公告管理',
+            'link' => '/cms/notice',
+            'icon' => 'icon-list',
+        ),
+    ),
+);
 $menu[] = array(
     'text' => '同城配送',
     "group" => true,
@@ -79,10 +113,10 @@ $menu[] = array(
             'icon' => 'icon-settings',
         ),
         array(
-          "text" => '系统设置',
-          'link' => '/system/setting',
-          'icon' => 'icon-settings',
-      ),
+            "text" => '系统设置',
+            'link' => '/system/setting',
+            'icon' => 'icon-settings',
+        ),
     ),
 );
 $menu[] = array(
