@@ -108,6 +108,16 @@ $menu[] = array(
     "acl" => "founder",
     "children" => array(
         array(
+            "text" => '表单设置',
+            'link' => '/formsBuilder/list',
+            'icon' => 'icon-list',
+        ),
+        array(
+          "text" => '表格设置',
+          'link' => '/tableBuilder/list',
+          'icon' => 'icon-list',
+      ),
+        array(
             "text" => '权限设置',
             'link' => '/role/setting',
             'icon' => 'icon-settings',
@@ -119,6 +129,7 @@ $menu[] = array(
         ),
     ),
 );
+
 $menu[] = array(
     'text' => 'bug反馈',
     "group" => true,

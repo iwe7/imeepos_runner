@@ -50,6 +50,7 @@ export function StartupServiceFactory(
   return () => startupService.load();
 }
 import { wurl } from '@core/global';
+
 let root = '';
 if (isDevMode()) {
   root = 'https://meepo.com.cn/';

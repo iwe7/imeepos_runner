@@ -1,0 +1,21 @@
+.svg-icon {
+    display: inline-block;
+    fill: currentColor;
+  }
+  .svg-icon.flip-horizontal {
+    transform: scale(-1, 1);
+  }
+  .svg-icon.flip-vertical {
+    transform: scale(1, -1);
+  }
+  .svg-icon.spin {
+    animation: fa-spin 1s 0s infinite linear;
+  }
+  @keyframes fa-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }

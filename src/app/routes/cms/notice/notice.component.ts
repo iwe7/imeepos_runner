@@ -18,6 +18,7 @@ import { SFSchema } from '@delon/form';
 import { UrlService } from '@core/url.service';
 import { filter, switchMap, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 @Component({
   selector: 'notice',
   templateUrl: './notice.component.html',
@@ -49,6 +50,7 @@ export class NoticeComponent implements OnInit {
     public _url: UrlService,
     public modal: NzModalService,
     public http: HttpClient,
+    public router: Router,
   ) {
     this.url = this._url.getWebOpen('web/cms/notice');
   }
@@ -69,16 +71,8 @@ export class NoticeComponent implements OnInit {
         },
         {
           text: '编辑',
-          type: 'modal',
-          component: EditNoticeComponent,
           click: (record: any, modal: any) =>
-            this.message.success(
-              `重新加载页面，回传值：${JSON.stringify(modal)}`,
-            ),
-          modalOptions: {
-            nzTitle: '添加公告',
-            nzFooter: [],
-          },
+            this.router.navigate(['/cms/notice-edit'], record.id),
         },
         {
           text: '更多',
@@ -103,32 +97,7 @@ export class NoticeComponent implements OnInit {
 
   ngOnInit() {}
 
-  addNotice(tpl: TemplateRef<any>) {
-    const ref = this.modal.create({
-      nzTitle: '添加公告',
-      nzContent: EditNoticeComponent,
-      nzComponentParams: {
-        record: {
-          title: '',
-          content: '',
-        },
-      },
-      nzFooter: null,
-    });
-    ref.afterClose
-      .pipe(
-        tap(res => {
-          ref.destroy();
-        }),
-        filter(res => !!res),
-        switchMap(res => {
-          return this.http.post(this._url.getWebOpen('web/cms/notice'), res, {
-            params: { op: 'add' },
-          });
-        }),
-      )
-      .subscribe(res => {
-        console.log(res);
-      });
+  addNotice() {
+    this.router.navigateByUrl('/cms/notice-add');
   }
 }

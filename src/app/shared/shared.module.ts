@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -18,20 +18,41 @@ import { NgxTinymceModule } from 'ngx-tinymce';
 import { GetElementRefDirective } from '@shared/get-element-ref';
 import { EditNoticeComponent } from './modal/edit-notice/edit-notice.component';
 import { NeditorComponent } from './neditor/neditor.component';
-import { UiEditorComponent } from './neditor/ui-editor/ui-editor.component';
 import { EduiBoxComponent } from './neditor/edui-box/edui-box.component';
+import { EduiBoxContentDirective } from './neditor/edui-box-content/edui-box-content.component';
+import { EduiBoxBodyDirective } from './neditor/edui-box-body/edui-box-body.component';
+import { EduiBoxIconComponent } from './neditor/edui-box-icon/edui-box-icon.component';
+import { AngularSvgIconModule } from 'angular-svg-icon';
+
+import { ColokPickerModule } from 'iwe7-colok-picker';
+import { ColorPickerModule } from 'iwe7-color-picker';
+import { VideoJsModule } from 'iwe7-video-js';
+import { AudioJsModule } from 'iwe7-audio-js';
 
 const THIRDMODULES = [
   NgZorroAntdModule,
   CountdownModule,
   UEditorModule,
   NgxTinymceModule,
+  ColokPickerModule,
+  ColorPickerModule,
+  VideoJsModule,
+  AudioJsModule
 ];
 // endregion
 
 // region: your componets & directives
-const COMPONENTS = [EditNoticeComponent, NeditorComponent, UiEditorComponent];
-const DIRECTIVES = [GetElementRefDirective];
+const COMPONENTS = [
+  EditNoticeComponent,
+  NeditorComponent,
+  EduiBoxComponent,
+  EduiBoxIconComponent,
+];
+const DIRECTIVES = [
+  GetElementRefDirective,
+  EduiBoxContentDirective,
+  EduiBoxBodyDirective,
+];
 // endregion
 
 @NgModule({
@@ -44,6 +65,7 @@ const DIRECTIVES = [GetElementRefDirective];
     DelonABCModule,
     DelonACLModule,
     DelonFormModule,
+    AngularSvgIconModule,
     // third libs
     ...THIRDMODULES,
   ],
@@ -51,7 +73,6 @@ const DIRECTIVES = [GetElementRefDirective];
     // your components
     ...COMPONENTS,
     ...DIRECTIVES,
-    EduiBoxComponent,
   ],
   exports: [
     CommonModule,
@@ -62,6 +83,7 @@ const DIRECTIVES = [GetElementRefDirective];
     DelonABCModule,
     DelonACLModule,
     DelonFormModule,
+    AngularSvgIconModule,
     // i18n
     TranslateModule,
     // third libs
@@ -71,5 +93,6 @@ const DIRECTIVES = [GetElementRefDirective];
     ...DIRECTIVES,
   ],
   entryComponents: [EditNoticeComponent],
+  schemas: [NO_ERRORS_SCHEMA],
 })
 export class SharedModule {}

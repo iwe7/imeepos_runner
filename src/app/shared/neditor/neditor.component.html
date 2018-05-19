@@ -1,2 +1,16 @@
-<edui-box></edui-box>
+<div class="edui-editor-toolbarbox edui-notadd">
+  <div class="edui-editor-toolbarboxouter edui-notadd">
+    <div class="edui-editor-toolbarboxinner edui-notadd">
+      <div class="edui-toolbar edui-notadd">
+        <ng-container *ngFor="let item of tools">
+          <edui-box [disabled]="item.disabled" [checked]="item.checked" [type]="item.type" [for]="item.for">
+            <edui-box-icon [name]="item.icon"></edui-box-icon>
+          </edui-box>
+          <div class="edui-box edui-separator edui-notadd"></div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+
 <textarea #textarea style="display: none;"></textarea>

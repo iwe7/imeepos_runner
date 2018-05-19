@@ -22,11 +22,19 @@ export class EditNoticeComponent {
           placeholder: '请输入公告标题',
         },
       },
+      coachtime: {
+        type: 'string',
+        title: '时间',
+        ui: {
+          placeholder: '请选择时间',
+          widget: 'colokpicker'
+        },
+      },
       content: {
         type: 'string',
         title: '公告内容',
         ui: {
-          widget: 'ueditor'
+          widget: 'ueditor',
         },
       },
     },

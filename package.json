@@ -56,15 +56,24 @@
     "@ngx-translate/core": "^10.0.1",
     "@ngx-translate/http-loader": "^3.0.1",
     "@types/lodash": "^4.14.108",
+    "@types/zeroclipboard": "^2.0.31",
     "ajv": "^6.4.0",
+    "angular-svg-icon": "^6.0.0",
     "core-js": "^2.5.4",
     "e-ngx-editor": "^5.1.0",
     "file-saver": "^1.3.8",
+    "iwe7-audio-js": "^1.0.0",
+    "iwe7-colok-picker": "^0.0.1",
+    "iwe7-color-picker": "^0.0.2",
     "iwe7-editor": "^0.1.2",
     "iwe7-global": "^0.0.1",
     "iwe7-http": "^1.0.0",
-    "iwe7-script": "^0.0.1",
+    "iwe7-script": "^0.0.5",
+    "iwe7-url": "^0.0.1",
+    "iwe7-util": "^0.0.2",
+    "iwe7-video-js": "^0.0.1",
     "moment": "^2.22.1",
+    "ng-inline-svg": "^7.0.0",
     "ng-zorro-antd": "^0.7.0-beta.5",
     "ngx-countdown": "^3.0.0",
     "ngx-tinymce": "^2.0.0",
@@ -73,7 +82,9 @@
     "rxjs-compat": "^6.1.0",
     "screenfull": "^3.3.1",
     "simple-line-icons": "^2.4.1",
+    "socket.io-client": "^2.1.1",
     "web-animations-js": "^2.3.1",
+    "zeroclipboard": "^2.3.0",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
@@ -123,7 +134,8 @@
     "webpack-bundle-analyzer": "^2.11.2",
     "webpack-cli": "^2.1.3",
     "webpack-dev-server": "^3.1.4",
-    "xlsx": "^0.12.12"
+    "xlsx": "^0.12.12",
+    "xml-loader": "^1.2.1"
   },
   "lint-staged": {
     "*.{cmd,html,json,md,sh,txt,xml,yml}": [

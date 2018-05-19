@@ -1,4 +1,7 @@
-<p>
-  edui-box works!
-</p>
-<div class="edui-notadd"></div>
+<div class="edui-notadd" [class.edui-state-disabled]="disabled" [class.edui-state-checked]="checked">
+  <div edui-box-content [disabled]="disabled" [type]="type">
+    <div edui-box-body [disabled]="disabled" [type]="type">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

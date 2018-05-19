@@ -11,14 +11,15 @@ import {
   ChangeDetectionStrategy,
   AfterViewInit,
   HostBinding,
-  ViewChild
+  ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as _ from 'lodash';
 import { Iwe7ScriptService } from 'iwe7-script';
-import { Iwe7GlobalService } from 'iwe7-global';
-
 import { UrlService } from '@core/url.service';
+
+import { Iwe7GlobalService } from 'iwe7-global';
 import { throttleTime, debounceTime } from 'rxjs/operators';
 
 declare let UE: any;
@@ -28,15 +29,31 @@ export const EDITOR_VALUE_ACCESSOR: any = {
   useExisting: forwardRef(() => NeditorComponent),
   multi: true,
 };
+import { SvgIconRegistryService } from 'angular-svg-icon';
 
 @Component({
   selector: 'neditor',
   templateUrl: './neditor.component.html',
   providers: [EDITOR_VALUE_ACCESSOR],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class NeditorComponent
   implements ControlValueAccessor, OnInit, OnDestroy, AfterViewInit {
+  @Input()
+  tools: any[] = [
+    {
+      icon: 'source',
+      type: 'button',
+      disabled: false,
+      checked: false,
+      onClick: () => {},
+    },
+    { icon: 'undo', disabled: true, checked: false, onClick: () => {} },
+    { icon: 'redo', disabled: true, checked: false, onClick: () => {} },
+    { icon: 'bold', disabled: false, checked: false, onClick: () => {} },
+    { icon: 'italic', disabled: false, checked: false, onClick: () => {} },
+  ];
   editor_text: string = '';
   elementRef: ElementRef;
   config: any;
@@ -135,29 +152,40 @@ export class NeditorComponent
   @HostBinding('class.myeditor') myeditor: boolean = true;
   @HostBinding('style.overflow') overflow: string = 'hidden';
 
+  @HostBinding('class.edui-editor') _editor: boolean = true;
+  @HostBinding('class.edui-notadd') _notadd: boolean = true;
+
   @ViewChild('textarea') textarea: ElementRef;
   random: any = 6;
+
   constructor(
     elementRef: ElementRef,
     public render: Renderer2,
     public script: Iwe7ScriptService,
     public url: UrlService,
     public global: Iwe7GlobalService,
+    private iconReg: SvgIconRegistryService,
   ) {
     this.elementRef = elementRef;
     render.listen(this.elementRef.nativeElement, 'click', () => {}); // 当数据变化时通过调用click事件触发数据检测，保证视图已更新
   }
+  loaded: boolean = false;
+  ngAfterViewInit() {}
 
-  ngOnInit() {}
-
-  ngAfterViewInit() {
+  ngOnInit() {
     this.script
       .load([
-        `${this.url.root}addons/runner_open/assets/neditor/neditor.config.js?t=${this.random}`,
-        `${this.url.root}addons/runner_open/assets/neditor/neditor.all.js?t=${this.random}`,
-        `${this.url.root}addons/runner_open/assets/neditor/i18n/zh-cn/zh-cn.js?t=${this.random}`,
+        `${
+          this.url.root
+        }addons/runner_open/assets/neditor/neditor.config.js?t=11`,
+        `${this.url.root}addons/runner_open/assets/neditor/neditor.all.js?t=11`,
+        `${
+          this.url.root
+        }addons/runner_open/assets/neditor/i18n/zh-cn/zh-cn.js?t=11`,
       ])
       .subscribe(res => {
+        this.loaded = true;
+        console.log(this.loaded);
         this.Editor = UE.Editor;
         this.EventBase = UE.EventBase;
         this.uNode = UE.uNode;
@@ -171,15 +199,12 @@ export class NeditorComponent
         if (this.global.map.has(this.id)) {
           this.ue = this.global.get(this.id);
           // UE.delEditor(this.id);
-          console.log(this.ue);
           this.ue.render(this.textarea.nativeElement);
           // this.global.set(this.id, this.ue);
         } else {
           this.ue = UE.getEditor(this.id, con);
-          console.log(this.ue);
           this.global.set(this.id, this.ue);
         }
-        console.dir(this.ue);
         // 注册事件
         this.addListener('ready', (editor: any) => {
           this.isReady = true;

@@ -1,0 +1,17 @@
+edui-box {
+  position: relative;
+  display: -moz-inline-box !important;
+  display: inline-block !important;
+  vertical-align: middle;
+}
+
+.edui-state-hover {
+  background-color: #c7c4c4;
+  .edui-icon svg {
+    display: block !important;
+  }
+}
+
+[edui-box-content] {
+  padding: 5px !important;
+}
