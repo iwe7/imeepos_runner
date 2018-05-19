@@ -1,5 +1,5 @@
-import { Component, HostBinding, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Component, HostBinding, OnInit, Inject } from '@angular/core';
+import { Router, NavigationEnd, ROUTES } from '@angular/router';
 import { SettingsService, TitleService } from '@delon/theme';
 import { filter } from 'rxjs/operators';
 import { Compiler } from '@angular/core';
@@ -25,7 +25,10 @@ export class AppComponent implements OnInit {
     private settings: SettingsService,
     private router: Router,
     private titleSrv: TitleService,
-  ) {}
+    @Inject(ROUTES) routes: any,
+  ) {
+    console.log(routes);
+  }
 
   ngOnInit() {
     this.router.events
