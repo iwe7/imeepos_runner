@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { SFSchema } from '@delon/form';
-import { NzModalService } from 'ng-zorro-antd';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { SFSchema, SFButton } from '@delon/form';
+import { NzModalService, NzModalRef } from 'ng-zorro-antd';
 import { CreateFieldComponent } from '../create-field/create-field.component';
+import { filter } from 'rxjs/operators';
 @Component({
   selector: 'create',
   templateUrl: './create.component.html',
@@ -39,7 +40,12 @@ export class CreateComponent implements OnInit {
       },
     },
   };
-  constructor(public modal: NzModalService) {}
+
+  button: SFButton = {
+    submit: '保存表单',
+  };
+
+  constructor(public modal: NzModalService, public cd: ChangeDetectorRef) {}
 
   ngOnInit() {}
 
@@ -47,11 +53,27 @@ export class CreateComponent implements OnInit {
     console.log(e);
   }
 
+  createModal: NzModalRef;
   createFormItem() {
-    this.modal.create({
+    this.createModal = this.modal.create({
       nzTitle: '添加项目',
       nzContent: CreateFieldComponent,
-      nzFooter: null
+      nzFooter: null,
+    });
+    this.createModal.afterClose.pipe(filter(res => !!res)).subscribe(res => {
+      const name = res['name'];
+      delete res[name];
+      this.schema = {
+        ...this.schema,
+        ...{
+          properties: {
+            ...this.schema.properties,
+            ...{
+              [`${name}`]: res,
+            },
+          },
+        },
+      };
     });
   }
 }

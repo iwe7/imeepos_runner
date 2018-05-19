@@ -10,11 +10,25 @@ export class CreateFieldBaseComponent implements OnInit {
   schema: SFSchema = {
     type: 'object',
     properties: {
-      title: {
+      name: {
         type: 'string',
         title: '名称',
         ui: {
-          placeholder: '请输入字段名称',
+          placeholder: '请输入名称',
+        },
+      },
+      title: {
+        type: 'string',
+        title: '标题',
+        ui: {
+          placeholder: '请输入标题',
+        },
+      },
+      default: {
+        type: 'string',
+        title: '默认值',
+        ui: {
+          placeholder: '请输入默认值',
         },
       },
       type: {
@@ -49,17 +63,19 @@ export class CreateFieldBaseComponent implements OnInit {
         },
       },
     },
+    required: ['name'],
   };
 
   button: SFButton = {
     submit: '下一步',
   };
 
-  @Output() onNext: EventEmitter<any> = new EventEmitter();
 
   constructor() {}
 
   ngOnInit() {}
+
+  @Output() onNext: EventEmitter<any> = new EventEmitter();
 
   next(e: any) {
     this.onNext.emit(e);

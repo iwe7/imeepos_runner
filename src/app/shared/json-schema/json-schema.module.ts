@@ -4,12 +4,14 @@ import { DelonFormModule, WidgetRegistry } from '@delon/form';
 
 import { TinymceWidget } from './widgets/tinymce/tinymce.widget';
 import { UeditorWidget } from './widgets/ueditor/ueditor.widget';
-import { ColokPickerWidget } from './widgets/colokpicker/colokpicker.widget';
+import { ClockPickerWidget } from './widgets/clockpicker/clockpicker.widget';
+import { IconPickerWidget } from './widgets/iconpicker/iconpicker.widget';
 
 export const SCHEMA_THIRDS_COMPONENTS = [
   TinymceWidget,
   UeditorWidget,
-  ColokPickerWidget,
+  ClockPickerWidget,
+  IconPickerWidget,
 ];
 
 @NgModule({
@@ -22,6 +24,7 @@ export class JsonSchemaModule {
   constructor(widgetRegistry: WidgetRegistry) {
     widgetRegistry.register(TinymceWidget.KEY, TinymceWidget);
     widgetRegistry.register(UeditorWidget.KEY, UeditorWidget);
-    widgetRegistry.register(ColokPickerWidget.KEY, ColokPickerWidget);
+    widgetRegistry.register(ClockPickerWidget.KEY, ClockPickerWidget);
+    widgetRegistry.register(IconPickerWidget.KEY, IconPickerWidget);
   }
 }

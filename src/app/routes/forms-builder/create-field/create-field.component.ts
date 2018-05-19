@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SFSchema } from '@delon/form';
+import { NzModalRef } from 'ng-zorro-antd';
 
 @Component({
   selector: 'create-field',
@@ -9,14 +10,23 @@ import { SFSchema } from '@delon/form';
 export class CreateFieldComponent implements OnInit {
   step: number = 0;
 
-  result: any = {};
-  constructor() {}
+  result: any = {
+    ui: {},
+  };
+  constructor(public modal: NzModalRef) {}
 
   ngOnInit() {}
 
   onNext(e: any) {
-    this.result = { ...this.result, ...e };
-    this.step ++;
-    console.log(this.result);
+    if (this.step === 3) {
+      this.result = {
+        ...this.result,
+        ...{ ui: e },
+      };
+      this.modal.close(this.result);
+    } else {
+      this.result = { ...this.result, ...e };
+    }
+    this.step++;
   }
 }

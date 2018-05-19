@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateFieldSchemaComponent } from './create-field-schema.component';
+import { LinkPickerComponent } from './link-picker.component';
 
-describe('CreateFieldSchemaComponent', () => {
-  let component: CreateFieldSchemaComponent;
-  let fixture: ComponentFixture<CreateFieldSchemaComponent>;
+describe('LinkPickerComponent', () => {
+  let component: LinkPickerComponent;
+  let fixture: ComponentFixture<LinkPickerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreateFieldSchemaComponent ]
+      declarations: [ LinkPickerComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateFieldSchemaComponent);
+    fixture = TestBed.createComponent(LinkPickerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

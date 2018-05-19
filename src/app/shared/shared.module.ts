@@ -24,20 +24,24 @@ import { EduiBoxBodyDirective } from './neditor/edui-box-body/edui-box-body.comp
 import { EduiBoxIconComponent } from './neditor/edui-box-icon/edui-box-icon.component';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 
-import { ColokPickerModule } from 'iwe7-colok-picker';
+import { ClockPickerModule } from 'iwe7-clock-picker';
 import { ColorPickerModule } from 'iwe7-color-picker';
 import { VideoJsModule } from 'iwe7-video-js';
 import { AudioJsModule } from 'iwe7-audio-js';
+import { AntdIconPickerModule } from 'antd-icon-picker';
+import { IconPickerComponent } from './icon-picker/icon-picker.component';
+import { LinkPickerComponent } from './link-picker/link-picker.component';
 
 const THIRDMODULES = [
   NgZorroAntdModule,
   CountdownModule,
   UEditorModule,
   NgxTinymceModule,
-  ColokPickerModule,
+  ClockPickerModule,
   ColorPickerModule,
   VideoJsModule,
-  AudioJsModule
+  AudioJsModule,
+  AntdIconPickerModule
 ];
 // endregion
 
@@ -47,6 +51,8 @@ const COMPONENTS = [
   NeditorComponent,
   EduiBoxComponent,
   EduiBoxIconComponent,
+  IconPickerComponent,
+  LinkPickerComponent,
 ];
 const DIRECTIVES = [
   GetElementRefDirective,
