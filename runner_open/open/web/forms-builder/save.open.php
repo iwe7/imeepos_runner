@@ -2,17 +2,19 @@
 global $_W, $_GPC;
 
 $input = $_GPC["__input"];
-$formData = $input['formData'];
-$form = $formData['form'];
-$data = array();
-$data['code'] = 'schema.forms.' . $form['code'];
-$data['value'] = serialize($input);
-$data['uniacid'] = -1;
+$form = $input['form'];
+$schema = $input['schema'];
 
-$item = pdo_get('runner_open_setting', array('code' => $data['code']));
+$data = array();
+$data['code'] = $form['code'];
+$data['form'] = serialize($form);
+$data['schema'] = serialize($schema);
+
+$data['create_time'] = time();
+$item = pdo_get('runner_open_forms_builder', array('code' => $data['code']));
 if (empty($item)) {
-    pdo_insert('runner_open_setting', $data);
+    pdo_insert('runner_open_forms_builder', $data);
 } else {
-    pdo_update('runner_open_setting', $data, array('id' => $item['id']));
+    pdo_update('runner_open_forms_builder', $data, array('id' => $item['id']));
 }
 meepoSuccess('', $data);

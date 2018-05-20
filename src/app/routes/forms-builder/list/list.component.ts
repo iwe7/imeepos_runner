@@ -4,8 +4,9 @@ import { NzModalService } from 'ng-zorro-antd';
 import { CreateComponent } from '../create/create.component';
 import { Iwe7UrlService } from 'iwe7-url';
 import { HttpClient } from '@angular/common/http';
-import { map, tap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { map, tap, debounceTime } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+
 import { Location } from '@angular/common';
 
 @Component({
@@ -15,6 +16,8 @@ import { Location } from '@angular/common';
 })
 export class ListComponent implements OnInit {
   list: any;
+
+  update$: Subject<any> = new Subject();
   constructor(
     public router: Router,
     public modal: NzModalService,
@@ -26,6 +29,9 @@ export class ListComponent implements OnInit {
   ngOnInit() {
     this.refresh();
     this.location.subscribe(item => {
+      this.update$.next();
+    });
+    this.update$.pipe(debounceTime(200)).subscribe(res => {
       this.refresh();
     });
   }
@@ -33,7 +39,7 @@ export class ListComponent implements OnInit {
   refresh() {
     this.http
       .get(this.url.getWebOpen('web/forms-builder/list'))
-      .pipe(map((res: any) => res.data), tap(res => console.log(res)))
+      .pipe(map((res: any) => res.data))
       .subscribe(res => {
         this.list = res;
       });

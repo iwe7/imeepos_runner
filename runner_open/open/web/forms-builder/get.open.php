@@ -2,12 +2,11 @@
 global $_W, $_GPC;
 
 $code = trim($_GPC['code']);
-$data = pdo_get('runner_open_setting', array('code' => $code));
+$data = pdo_get('runner_open_forms_builder', array('code' => $code));
 if (empty($data)) {
     $data = array();
 } else {
-    $data['value'] = unserialize($data['value']);
-    $data['form'] = $data['value']['formData'];
-    $data['schema'] = $data['value']['schema'];
+    $data['form'] = unserialize($data['form']);
+    $data['schema'] = unserialize($data['schema']);
 }
 meepoSuccess('', $data);

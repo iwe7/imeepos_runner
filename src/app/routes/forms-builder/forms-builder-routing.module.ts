@@ -39,7 +39,7 @@ const routes: Routes = [
   {
     path: 'fields/:id',
     component: FieldsComponent,
-    data: { title: '表单设置' },
+    data: { title: '表单类型' },
   },
   {
     path: 'valids/:id',

@@ -22,54 +22,43 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CreateComponent implements OnInit {
   @Input()
   schema: SFSchema = {
+    type: 'object',
+    title: '表单信息',
     properties: {
-      form: {
-        type: 'object',
-        title: '表单信息',
-        properties: {
-          action: {
-            type: 'string',
-            title: '提交地址',
-            ui: {
-              placeholder: '请输入提交地址',
-              widget: 'string',
-            },
-          },
-          code: {
-            type: 'string',
-            title: '表单代号',
-            ui: {
-              placeholder: '请输入英文字符作为唯一标识',
-              widget: 'string',
-            },
-          },
-          title: {
-            type: 'string',
-            title: '表单名称',
-            ui: {
-              placeholder: '请输入表单名称',
-              widget: 'string',
-            },
-          },
-          desc: {
-            type: 'string',
-            title: '表单备注',
-            ui: {
-              placeholder: '请输入表单备注',
-              widget: 'string',
-            },
-          },
+      action: {
+        type: 'string',
+        title: '提交地址',
+        ui: {
+          placeholder: '请输入提交地址',
+          widget: 'string',
         },
-        required: ['action', 'code', 'title', 'desc'],
       },
-      fields: {
-        type: 'object',
-        title: '表单字段',
-        properties: {},
-        required: [],
+      code: {
+        type: 'string',
+        title: '表单代号',
+        ui: {
+          placeholder: '请输入英文字符作为唯一标识',
+          widget: 'string',
+        },
+      },
+      title: {
+        type: 'string',
+        title: '表单名称',
+        ui: {
+          placeholder: '请输入表单名称',
+          widget: 'string',
+        },
+      },
+      desc: {
+        type: 'string',
+        title: '表单备注',
+        ui: {
+          placeholder: '请输入表单备注',
+          widget: 'string',
+        },
       },
     },
-    required: ['form'],
+    required: ['action', 'code', 'title', 'desc'],
   };
 
   button: SFButton = {
@@ -105,10 +94,16 @@ export class CreateComponent implements OnInit {
   ngOnInit() {}
 
   submit(e: any) {
+    let schema: any = {
+      type: 'object',
+    };
+    if (e.code === 'formsBuilderSave') {
+      schema = this.schema;
+    }
     this.http
       .post(this.url.getOpenUrl('web/forms-builder/save'), {
-        formData: e,
-        schema: this.schema,
+        form: e,
+        schema: schema,
       })
       .subscribe(res => {
         this.location.back();
