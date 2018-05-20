@@ -1,0 +1,36 @@
+<nz-card style="width:300px;" [nzActions]="[actionEdit,actionDelete,actionEllipsis]">
+  <nz-card-meta [nzTitle]="form.title" [nzDescription]="form.desc"></nz-card-meta>
+  <ul>
+    <li *ngFor="let item of schemas">{{item|json}}</li>
+  </ul>
+</nz-card>
+<ng-template #actionDelete>
+  <nz-popover>
+    <i class="anticon anticon-delete" nz-popover></i>
+    <ng-template #nzTemplate>
+      您确定要删除这个表单么?
+      <button nz-button nzSize="small" (click)="delete()" nzType="danger">确定</button>
+    </ng-template>
+  </nz-popover>
+</ng-template>
+<ng-template #actionEdit>
+  <i class="anticon anticon-edit" (click)="editForm()"></i>
+</ng-template>
+<ng-template #actionEllipsis>
+  <nz-dropdown>
+    <a nz-dropdown>
+      <i class="anticon anticon-ellipsis"></i>
+    </a>
+    <ul nz-menu nzSelectable>
+      <li nz-menu-item (click)="previewForm()">
+        <a>预览</a>
+      </li>
+      <li nz-menu-item (click)="fieldsForm()">
+        <a>表单</a>
+      </li>
+      <li nz-menu-item (click)="validsForm()">
+        <a>验证</a>
+      </li>
+    </ul>
+  </nz-dropdown>
+</ng-template>

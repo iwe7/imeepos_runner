@@ -3,5 +3,8 @@
     <button nz-button (click)="createForm()">创建表单</button>
   </ng-template>
 </page-header>
-
-
+<div class="list-container">
+  <ng-container *ngFor="let item of list">
+    <list-item (refresh)="refresh()" [code]="item.code" [form]="item.form" [schema]="item.schema"></list-item>
+  </ng-container>
+</div>
