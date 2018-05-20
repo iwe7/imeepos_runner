@@ -11,7 +11,6 @@ import { CreateFieldSchemaComponent } from './create-field/create-field-schema/c
 import { CreateFieldUiComponent } from './create-field/create-field-ui/create-field-ui.component';
 import { CreateFieldWidgetComponent } from './create-field/create-field-widget/create-field-widget';
 
-
 @NgModule({
   imports: [CommonModule, FormsBuilderRoutingModule, SharedModule],
   declarations: [
@@ -21,8 +20,8 @@ import { CreateFieldWidgetComponent } from './create-field/create-field-widget/c
     CreateFieldBaseComponent,
     CreateFieldSchemaComponent,
     CreateFieldUiComponent,
-    CreateFieldWidgetComponent
+    CreateFieldWidgetComponent,
   ],
-  entryComponents: [CreateFieldComponent],
+  entryComponents: [CreateFieldComponent, CreateComponent],
 })
 export class FormsBuilderModule {}

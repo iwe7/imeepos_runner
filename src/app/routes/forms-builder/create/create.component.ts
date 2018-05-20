@@ -1,48 +1,42 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
 import { SFSchema, SFButton } from '@delon/form';
 import { NzModalService, NzModalRef } from 'ng-zorro-antd';
 import { CreateFieldComponent } from '../create-field/create-field.component';
 import { filter } from 'rxjs/operators';
+import { defaultsDeep } from 'lodash';
+
 @Component({
   selector: 'create',
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.css'],
 })
 export class CreateComponent implements OnInit {
+  @Input()
   schema: SFSchema = {
     properties: {
       action: {
         type: 'string',
-        title: '表单提交地址',
+        title: '提交地址',
         ui: {
           placeholder: '请输入提交地址',
+          widget: 'string',
         },
       },
       code: {
         type: 'string',
-        title: '代号',
+        title: '表单代号',
         ui: {
           placeholder: '请输入英文字符作为唯一标识',
-        },
-      },
-      select: {
-        type: 'string',
-        title: '状态',
-        enum: [
-          { label: '待支付', value: 'WAIT_BUYER_PAY' },
-          { label: '已支付', value: 'TRADE_SUCCESS' },
-          { label: '交易完成', value: 'TRADE_FINISHED' },
-        ],
-        default: 'WAIT_BUYER_PAY',
-        ui: {
-          widget: 'select',
+          widget: 'string',
         },
       },
     },
+    required: ['action', 'code'],
   };
 
   button: SFButton = {
-    submit: '保存表单',
+    submit: '添加字段',
+    reset: null,
   };
 
   constructor(public modal: NzModalService, public cd: ChangeDetectorRef) {}
@@ -50,7 +44,7 @@ export class CreateComponent implements OnInit {
   ngOnInit() {}
 
   submit(e: any) {
-    console.log(e);
+    this.createFormItem();
   }
 
   createModal: NzModalRef;
@@ -61,18 +55,14 @@ export class CreateComponent implements OnInit {
       nzFooter: null,
     });
     this.createModal.afterClose.pipe(filter(res => !!res)).subscribe(res => {
-      const name = res['name'];
-      delete res[name];
+      this.schema = defaultsDeep(this.schema, {
+        properties: {
+          ...this.schema.properties,
+          [`${res['name']}`]: res,
+        },
+      });
       this.schema = {
         ...this.schema,
-        ...{
-          properties: {
-            ...this.schema.properties,
-            ...{
-              [`${name}`]: res,
-            },
-          },
-        },
       };
     });
   }

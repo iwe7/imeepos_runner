@@ -45,7 +45,7 @@ export class CreateFieldUiComponent implements OnInit {
       },
       addOnAfter: {
         type: 'string',
-        title: '前置标签',
+        title: '后缀标签',
       },
       addOnBeforeIcon: {
         type: 'string',
@@ -57,6 +57,9 @@ export class CreateFieldUiComponent implements OnInit {
       addOnAfterIcon: {
         type: 'string',
         title: '后置Icon',
+        ui: {
+          widget: 'iconpicker',
+        }
       },
       prefix: {
         type: 'string',
@@ -65,6 +68,9 @@ export class CreateFieldUiComponent implements OnInit {
       prefixIcon: {
         type: 'string',
         title: '前缀图标',
+        ui: {
+          widget: 'iconpicker',
+        }
       },
       suffix: {
         type: 'string',
@@ -73,6 +79,9 @@ export class CreateFieldUiComponent implements OnInit {
       suffixIcon: {
         type: 'string',
         title: '后缀图标',
+        ui: {
+          widget: 'iconpicker',
+        }
       },
     };
   }
@@ -107,9 +116,5 @@ export class CreateFieldUiComponent implements OnInit {
       };
     }
     this.onNext.emit(e);
-  }
-
-  back(e: any) {
-    console.log(e);
   }
 }

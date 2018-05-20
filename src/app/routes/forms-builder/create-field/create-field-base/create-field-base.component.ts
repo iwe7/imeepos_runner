@@ -33,8 +33,8 @@ export class CreateFieldBaseComponent implements OnInit {
       },
       type: {
         type: 'string',
-        title: '名称',
-        default: 'object',
+        title: '类型',
+        default: 'string',
         enum: [
           {
             value: 'number',
@@ -79,9 +79,5 @@ export class CreateFieldBaseComponent implements OnInit {
 
   next(e: any) {
     this.onNext.emit(e);
-  }
-
-  back(e: any) {
-    console.log(e);
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SFSchema } from '@delon/form';
 import { NzModalRef } from 'ng-zorro-antd';
-
+import { defaultsDeep } from 'lodash';
 @Component({
   selector: 'create-field',
   templateUrl: './create-field.component.html',
@@ -18,15 +18,25 @@ export class CreateFieldComponent implements OnInit {
   ngOnInit() {}
 
   onNext(e: any) {
-    if (this.step === 3) {
-      this.result = {
-        ...this.result,
-        ...{ ui: e },
-      };
+    if (this.step === 1) {
+      this.result = defaultsDeep(this.result, {
+        ui: {
+          ...e,
+        },
+      });
+    } else if (this.step === 3) {
+      this.result = defaultsDeep(this.result, {
+        ui: {
+          ...e,
+        },
+      });
       this.modal.close(this.result);
     } else {
-      this.result = { ...this.result, ...e };
+      this.result = defaultsDeep(this.result, {
+        ...e,
+      });
     }
     this.step++;
+    console.log(this.result);
   }
 }

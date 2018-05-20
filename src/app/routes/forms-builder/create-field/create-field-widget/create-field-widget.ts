@@ -113,6 +113,10 @@ export class CreateFieldWidgetComponent implements OnInit {
           },
         ],
       },
+      required: {
+        type: 'boolean',
+        title: '必填',
+      },
     },
   };
 
@@ -128,9 +132,5 @@ export class CreateFieldWidgetComponent implements OnInit {
 
   next(e: any) {
     this.onNext.emit(e);
-  }
-
-  back(e: any) {
-    console.log(e);
   }
 }

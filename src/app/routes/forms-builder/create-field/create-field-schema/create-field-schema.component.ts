@@ -68,8 +68,4 @@ export class CreateFieldSchemaComponent implements OnInit {
   next(e: any) {
     this.onNext.emit(e);
   }
-
-  back(e: any) {
-    console.log(e);
-  }
 }
