@@ -1,1 +1,7 @@
-<sf [schema]="schema" [button]="button" (formSubmit)="submit($event)"></sf>
+<page-header title="表单项目">
+  <ng-template #action>
+    <button nz-button (click)="createForm()">创建表单</button>
+  </ng-template>
+</page-header>
+
+<sf [schema]="schema" #sf [button]="button" (formSubmit)="submit($event)"></sf>

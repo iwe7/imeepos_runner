@@ -1,5 +1,11 @@
-import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
-import { SFSchema, SFButton } from '@delon/form';
+import {
+  Component,
+  OnInit,
+  ChangeDetectorRef,
+  Input,
+  ViewChild,
+} from '@angular/core';
+import { SFSchema, SFButton, SFComponent } from '@delon/form';
 import { NzModalService, NzModalRef } from 'ng-zorro-antd';
 import { CreateFieldComponent } from '../create-field/create-field.component';
 import { filter } from 'rxjs/operators';
@@ -65,5 +71,12 @@ export class CreateComponent implements OnInit {
         ...this.schema,
       };
     });
+  }
+  @ViewChild('sf', {
+    read: SFComponent,
+  })
+  sf: SFComponent;
+  createForm() {
+    this.sf.reset();
   }
 }

@@ -15,10 +15,5 @@ export class ListComponent implements OnInit {
 
   createForm() {
     this.router.navigateByUrl('/formsBuilder/create');
-    // this.modal.create({
-    //   nzTitle: '添加表单',
-    //   nzContent: CreateComponent,
-    //   nzFooter: null
-    // });
   }
 }
