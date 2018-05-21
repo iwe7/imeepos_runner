@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { SFSchema } from '@delon/form';
 import { NzModalRef } from 'ng-zorro-antd';
 import { defaultsDeep } from 'lodash';
@@ -13,30 +13,22 @@ export class CreateFieldComponent implements OnInit {
   result: any = {
     ui: {},
   };
+
+  @Input() record: any;
+
   constructor(public modal: NzModalRef) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this);
+  }
 
   onNext(e: any) {
-    if (this.step === 1) {
-      this.result = defaultsDeep(this.result, {
-        ui: {
-          ...e,
-        },
-      });
-    } else if (this.step === 3) {
-      this.result = defaultsDeep(this.result, {
-        ui: {
-          ...e,
-        },
-      });
+    if (this.step === 3) {
+      this.result = defaultsDeep(this.result, e);
       this.modal.close(this.result);
-    } else {
-      this.result = defaultsDeep(this.result, {
-        ...e,
-      });
+      return;
     }
+    this.result = defaultsDeep(this.result, e);
     this.step++;
-    console.log(this.result);
   }
 }

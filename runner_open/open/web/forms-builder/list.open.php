@@ -6,6 +6,7 @@ $list = pdo_fetchall($sql, array());
 foreach ($list as &$li) {
     $li['form'] = unserialize($li['form']);
     $li['schema'] = unserialize($li['schema']);
+    $li['formData'] = unserialize($li['formData']);
 }
 unset($li);
 meepoSuccess('', $list);

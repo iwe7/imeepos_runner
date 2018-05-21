@@ -9,7 +9,12 @@ import { SFSchema, SFSchemaEnumType, SFButton } from '@delon/form';
 export class CreateFieldUiComponent implements OnInit {
   schema: SFSchema = {
     type: 'object',
-    properties: {},
+    properties: {
+      ui: {
+        type: 'object',
+        properties: {},
+      },
+    },
   };
 
   button: SFButton = {
@@ -20,7 +25,7 @@ export class CreateFieldUiComponent implements OnInit {
   @Input()
   set type(val: string) {
     this._type = val;
-    this.schema.properties = this[val]();
+    this.schema.properties.ui.properties = this[val]();
   }
 
   @Output() onNext: EventEmitter<any> = new EventEmitter();
@@ -59,7 +64,7 @@ export class CreateFieldUiComponent implements OnInit {
         title: '后置Icon',
         ui: {
           widget: 'iconpicker',
-        }
+        },
       },
       prefix: {
         type: 'string',
@@ -70,7 +75,7 @@ export class CreateFieldUiComponent implements OnInit {
         title: '前缀图标',
         ui: {
           widget: 'iconpicker',
-        }
+        },
       },
       suffix: {
         type: 'string',
@@ -81,10 +86,12 @@ export class CreateFieldUiComponent implements OnInit {
         title: '后缀图标',
         ui: {
           widget: 'iconpicker',
-        }
+        },
       },
     };
   }
+
+  @Input() formData: any = {};
 
   number() {
     return {

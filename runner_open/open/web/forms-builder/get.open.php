@@ -8,5 +8,8 @@ if (empty($data)) {
 } else {
     $data['form'] = unserialize($data['form']);
     $data['schema'] = unserialize($data['schema']);
+    $data['formData'] = unserialize($data['formData']);
+    $data['ui'] = unserialize($data['ui']);
+    $data['button'] = unserialize($data['button']);
 }
 meepoSuccess('', $data);

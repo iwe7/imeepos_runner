@@ -5,8 +5,8 @@
     <nz-step nzTitle="schema"></nz-step>
     <nz-step nzTitle="ui"></nz-step>
   </nz-steps>
-  <create-field-base *ngIf="step===0" (onNext)="onNext($event)"></create-field-base>
-  <create-field-widget (onNext)="onNext($event)" *ngIf="step===1"></create-field-widget>
-  <create-field-schema (onNext)="onNext($event)" [type]="result.ui.widget" *ngIf="step===2"></create-field-schema>
-  <create-field-ui (onNext)="onNext($event)" [type]="result.ui.widget" *ngIf="step===3"></create-field-ui>
+  <create-field-base *ngIf="step===0" [formData]="record" (onNext)="onNext($event)"></create-field-base>
+  <create-field-widget (onNext)="onNext($event)" [formData]="record" *ngIf="step===1"></create-field-widget>
+  <create-field-schema (onNext)="onNext($event)" [formData]="record" [type]="result.ui.widget" *ngIf="step===2"></create-field-schema>
+  <create-field-ui (onNext)="onNext($event)" [formData]="record" [type]="result.ui.widget" *ngIf="step===3"></create-field-ui>
 </nz-card>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { SFSchema, SFSchemaEnumType, SFButton } from '@delon/form';
 
 @Component({
@@ -70,10 +70,13 @@ export class CreateFieldBaseComponent implements OnInit {
     submit: '下一步',
   };
 
+  @Input() formData: any = {};
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.formData);
+  }
 
   @Output() onNext: EventEmitter<any> = new EventEmitter();
 

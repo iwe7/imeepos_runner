@@ -33,14 +33,6 @@ export class CreateComponent implements OnInit {
           widget: 'string',
         },
       },
-      code: {
-        type: 'string',
-        title: '表单代号',
-        ui: {
-          placeholder: '请输入英文字符作为唯一标识',
-          widget: 'string',
-        },
-      },
       title: {
         type: 'string',
         title: '表单名称',
@@ -55,6 +47,103 @@ export class CreateComponent implements OnInit {
         ui: {
           placeholder: '请输入表单备注',
           widget: 'string',
+        },
+      },
+      code: {
+        type: 'string',
+        title: '表单代号',
+        default: 'forms_' + new Date().getTime(),
+        ui: {
+          placeholder: '请输入英文字符作为唯一标识',
+          widget: 'string',
+        },
+      },
+      mode: {
+        type: 'string',
+        title: '模式',
+        default: 'default',
+        enum: [
+          {
+            label: '默认',
+            value: 'default',
+          },
+          {
+            label: '搜索',
+            value: 'search',
+          },
+          {
+            label: '编辑',
+            value: 'edit',
+          },
+        ],
+        ui: {
+          widget: 'select',
+        },
+      },
+      layout: {
+        type: 'string',
+        title: '布局',
+        default: 'horizontal',
+        enum: [
+          {
+            label: '水平',
+            value: 'horizontal',
+          },
+          {
+            label: '垂直',
+            value: 'vertical',
+          },
+          {
+            label: '行内',
+            value: 'inline',
+          },
+        ],
+        ui: {
+          widget: 'select',
+        },
+      },
+      autocomplete: {
+        type: 'string',
+        title: '自动补全',
+        default: 'on',
+        enum: [
+          {
+            label: '开启',
+            value: 'on',
+          },
+          {
+            label: '关闭',
+            value: 'off',
+          },
+        ],
+        ui: {
+          widget: 'select',
+        },
+      },
+      firstVisual: {
+        type: 'boolean',
+        title: '立即显示',
+        default: true,
+      },
+      liveValidate: {
+        type: 'boolean',
+        title: '实时校验',
+        default: true,
+      },
+      button: {
+        type: 'object',
+        title: '按钮设置',
+        properties: {
+          submit: {
+            type: 'string',
+            title: '提交按钮',
+            default: '保存',
+          },
+          reset: {
+            type: 'string',
+            title: '重置按钮',
+            default: '重置',
+          },
         },
       },
     },
@@ -85,7 +174,13 @@ export class CreateComponent implements OnInit {
           .get(this.url.getWebOpen('web/forms-builder/get', { code: this.id }))
           .pipe(map((res: any) => res.data))
           .subscribe((res: any) => {
-            this.formData = res.form;
+            this.formData = {
+              code: res.code,
+              title: res.title,
+              desc: res.desc,
+              button: res.button,
+              action: res.action,
+            };
           });
       }
     });
@@ -97,13 +192,16 @@ export class CreateComponent implements OnInit {
     let schema: any = {
       type: 'object',
     };
+    let formData: any = {};
     if (e.code === 'formsBuilderSave') {
       schema = this.schema;
+      formData = this.formData;
     }
     this.http
       .post(this.url.getOpenUrl('web/forms-builder/save'), {
         form: e,
         schema: schema,
+        formData: formData,
       })
       .subscribe(res => {
         this.location.back();

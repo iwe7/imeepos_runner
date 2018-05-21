@@ -23,6 +23,8 @@ export class CreateFieldSchemaComponent implements OnInit {
 
   @Output() onNext: EventEmitter<any> = new EventEmitter();
 
+  @Input() formData: any = {};
+
   constructor() {}
 
   ngOnInit() {}

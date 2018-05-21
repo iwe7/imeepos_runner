@@ -1,4 +1,9 @@
 <page-header title="表单预览"></page-header>
-<p>
-  preview works!
-</p>
+<nz-card>
+  <sf #settingSf [schema]="settingSchema" mode="search" [button]="settingButton"></sf>
+</nz-card>
+
+<nz-card>
+  <sf #sf *ngIf="schema" [mode]="mode" [firstVisual]="firstVisual" [liveValidate]="liveValidate" [layout]="layout" [autocomplete]="autocomplete"
+    [attr.id]="formId" [schema]="schema" [formData]="formData" [button]="button" [ui]="ui"></sf>
+</nz-card>
