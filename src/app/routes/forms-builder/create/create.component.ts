@@ -217,12 +217,15 @@ export class CreateComponent implements OnInit {
       nzFooter: null,
     });
     this.createModal.afterClose.pipe(filter(res => !!res)).subscribe(res => {
-      this.schema = defaultsDeep(this.schema, {
-        properties: {
-          ...this.schema.properties,
-          [`${res['name']}`]: res,
+      this.schema = defaultsDeep(
+        {
+          properties: {
+            ...this.schema.properties,
+            [`${res['name']}`]: res,
+          },
         },
-      });
+        this.schema,
+      );
       this.sf.refreshSchema(this.schema);
       console.log(this.schema);
     });

@@ -31,6 +31,11 @@ export class CreateFieldBaseComponent implements OnInit {
           placeholder: '请输入默认值',
         },
       },
+      description: {
+        type: 'string',
+        title: '解释',
+        ui: {},
+      },
       type: {
         type: 'string',
         title: '类型',

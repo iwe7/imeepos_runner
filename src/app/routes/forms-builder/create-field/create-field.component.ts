@@ -24,11 +24,11 @@ export class CreateFieldComponent implements OnInit {
 
   onNext(e: any) {
     if (this.step === 3) {
-      this.result = defaultsDeep(this.result, e);
+      this.result = defaultsDeep(e, this.result);
       this.modal.close(this.result);
       return;
     }
-    this.result = defaultsDeep(this.result, e);
+    this.result = defaultsDeep(e, this.result);
     this.step++;
   }
 }

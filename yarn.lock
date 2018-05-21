@@ -7304,6 +7304,13 @@ ng-inline-svg@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/ng-inline-svg/-/ng-inline-svg-7.0.0.tgz#4538864abf4589d334ad01a6d676794bb81682ac"
 
+ng-zorro-antd@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/ng-zorro-antd/-/ng-zorro-antd-0.7.0.tgz#36c60d72ee2303a97e6dcc4b8f93cba9cf4269ff"
+  dependencies:
+    "@angular/cdk" "^5.0.0"
+    date-fns "^1.29.0"
+
 ng-zorro-antd@^0.7.0-beta.5:
   version "0.7.0-beta.5"
   resolved "https://registry.yarnpkg.com/ng-zorro-antd/-/ng-zorro-antd-0.7.0-beta.5.tgz#204fa475d05e1e6e4b5254b92d182db9875f0324"
