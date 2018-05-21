@@ -6,12 +6,14 @@ import { TinymceWidget } from './widgets/tinymce/tinymce.widget';
 import { UeditorWidget } from './widgets/ueditor/ueditor.widget';
 import { ClockPickerWidget } from './widgets/clockpicker/clockpicker.widget';
 import { IconPickerWidget } from './widgets/iconpicker/iconpicker.widget';
+import { FormBuilderWidget } from './widgets/form-builder/form-builder.widget';
 
 export const SCHEMA_THIRDS_COMPONENTS = [
   TinymceWidget,
   UeditorWidget,
   ClockPickerWidget,
   IconPickerWidget,
+  FormBuilderWidget
 ];
 
 @NgModule({
@@ -26,5 +28,6 @@ export class JsonSchemaModule {
     widgetRegistry.register(UeditorWidget.KEY, UeditorWidget);
     widgetRegistry.register(ClockPickerWidget.KEY, ClockPickerWidget);
     widgetRegistry.register(IconPickerWidget.KEY, IconPickerWidget);
+    widgetRegistry.register(FormBuilderWidget.KEY, FormBuilderWidget);
   }
 }

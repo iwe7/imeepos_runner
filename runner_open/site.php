@@ -39,8 +39,9 @@ class Runner_openModuleSite extends WeModuleSite
 
     private function autoLoginWeb()
     {
-        global $_W;
+        global $_W, $_GPC;
         $token = $_SERVER['HTTP_TOKEN'];
+        $_W['uniacid'] = isset($_GPC['i']) ? intval($_GPC['i']) : $_W['uniacid'];
         load()->model('user');
         if (!empty($token)) {
             $item = pdo_get('runner_open_token', array('sign' => $token));
@@ -93,7 +94,6 @@ class Runner_openModuleSite extends WeModuleSite
         global $_W, $_GPC;
         if (empty($_GET['do']) || empty($_GET['i'])) {
             $url = $this->createWebUrl($do, array('i' => $_W['uniacid']));
-            print_r($url);
             header("Location:" . $url);
             exit();
         }

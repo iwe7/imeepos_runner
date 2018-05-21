@@ -11,4 +11,6 @@ $item['schema'] = serialize($item['schema']);
 if (!empty($item)) {
     pdo_update('runner_open_forms_builder', $item, array('id' => $item['id']));
 }
+$item['schema'] = unserialize($item['schema']);
+
 meepoSuccess('', $item);

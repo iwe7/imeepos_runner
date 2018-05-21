@@ -3,10 +3,12 @@ import { SimpleTableColumn } from '@delon/abc';
 import { ActivatedRoute } from '@angular/router';
 import { Iwe7UrlService } from 'iwe7-url';
 import { HttpClient } from '@angular/common/http';
-import { map, tap } from 'rxjs/operators';
+import { map, tap, debounceTime, filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { CreateFieldComponent } from '../create-field/create-field.component';
+import { CreateFieldComponent } from 'iwe7-forms-builder';
+
 import { defaultsDeep } from 'lodash';
+import { NzModalService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'fields',
@@ -27,7 +29,7 @@ export class FieldsComponent implements OnInit {
           type: 'modal',
           component: CreateFieldComponent,
           click: (record: any, modal: any) => {
-            const data = defaultsDeep(record, modal);
+            const data = defaultsDeep(modal, record);
             this.http
               .post(this.url.getWebOpen('web/forms-builder/updateField'), {
                 code: this.id,
@@ -51,6 +53,7 @@ export class FieldsComponent implements OnInit {
     public route: ActivatedRoute,
     public url: Iwe7UrlService,
     public http: HttpClient,
+    public modal: NzModalService,
   ) {
     this.route.params.subscribe(res => {
       this.id = res.id;
@@ -79,5 +82,22 @@ export class FieldsComponent implements OnInit {
         }),
         tap(res => console.log(res)),
       );
+  }
+
+  addField() {
+    const modalRef = this.modal.create({
+      nzContent: CreateFieldComponent,
+      nzFooter: null,
+    });
+    modalRef.afterClose.pipe(filter(res => !!res)).subscribe(res => {
+      this.http
+        .post(this.url.getWebOpen('web/forms-builder/updateField'), {
+          code: this.id,
+          data: res,
+        })
+        .subscribe(res => {
+          console.log(res);
+        });
+    });
   }
 }

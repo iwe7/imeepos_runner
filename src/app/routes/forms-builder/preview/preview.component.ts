@@ -177,6 +177,7 @@ export class PreviewComponent implements OnInit, AfterViewInit {
       .subscribe(res => {
         this.formData = res.formData;
         this.schema = res.schema;
+        this.schema['properties'] = this.schema['properties'] || {};
         this.button = res.button;
         this.ui = res.ui;
         this.formId = 'form' + res.id;
@@ -186,5 +187,9 @@ export class PreviewComponent implements OnInit, AfterViewInit {
         this.liveValidate = res.liveValidate === 1 ? true : false;
         this.mode = res.mode;
       });
+  }
+
+  setSf(e: any): void {
+    this.sf = e;
   }
 }

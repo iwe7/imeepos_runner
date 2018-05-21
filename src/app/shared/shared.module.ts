@@ -29,8 +29,9 @@ import { ColorPickerModule } from 'iwe7-color-picker';
 import { VideoJsModule } from 'iwe7-video-js';
 import { AudioJsModule } from 'iwe7-audio-js';
 import { AntdIconPickerModule } from 'antd-icon-picker';
-import { IconPickerComponent } from './icon-picker/icon-picker.component';
 import { LinkPickerComponent } from './link-picker/link-picker.component';
+
+import { FormsBuilder } from 'iwe7-forms-builder';
 
 const THIRDMODULES = [
   NgZorroAntdModule,
@@ -41,7 +42,8 @@ const THIRDMODULES = [
   ColorPickerModule,
   VideoJsModule,
   AudioJsModule,
-  AntdIconPickerModule
+  AntdIconPickerModule,
+  FormsBuilder
 ];
 // endregion
 
@@ -51,13 +53,15 @@ const COMPONENTS = [
   NeditorComponent,
   EduiBoxComponent,
   EduiBoxIconComponent,
-  IconPickerComponent,
-  LinkPickerComponent,
+  LinkPickerComponent
 ];
+
+import { GetSfDirective } from './get-sf';
 const DIRECTIVES = [
   GetElementRefDirective,
   EduiBoxContentDirective,
   EduiBoxBodyDirective,
+  GetSfDirective
 ];
 // endregion
 

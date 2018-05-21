@@ -4,6 +4,6 @@
 </nz-card>
 
 <nz-card>
-  <sf #sf *ngIf="schema" [mode]="mode" [firstVisual]="firstVisual" [liveValidate]="liveValidate" [layout]="layout" [autocomplete]="autocomplete"
-    [attr.id]="formId" [schema]="schema" [formData]="formData" [button]="button" [ui]="ui"></sf>
+  <sf #sf (getSf)="setSf($event)" *ngIf="schema" [mode]="mode" [firstVisual]="firstVisual" [liveValidate]="liveValidate" [layout]="layout"
+    [autocomplete]="autocomplete" [attr.id]="formId" [schema]="schema" [formData]="formData" [button]="button" [ui]="ui"></sf>
 </nz-card>

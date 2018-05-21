@@ -9,7 +9,7 @@ const routes: Routes = [
     component: PostComponent,
   },
   {
-    path: 'detail',
+    path: 'detail/:id',
     component: BugStatusComponent,
     data: {
       title: 'bug详情',

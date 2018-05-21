@@ -1,13 +1,2 @@
 <page-header></page-header>
-
-<nz-card title="bug反馈">
-  <standard-form-row grid title="标题">
-    <input type="text" nz-input placeholder="请输入标题">
-  </standard-form-row>
-  <standard-form-row grid title="描述">
-    <textarea nz-input placeholder="请输入详细描述"></textarea>
-  </standard-form-row>
-</nz-card>
-
-<button nz-button (click)="post()">提交</button>
-
+<sf [schema]="schema" (formSubmit)="post($event)"></sf>

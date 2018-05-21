@@ -2,10 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CreateComponent } from './create/create.component';
 import { ListComponent } from './list/list.component';
-import { CreateFieldComponent } from './create-field/create-field.component';
 import { PreviewComponent } from './preview/preview.component';
 import { FieldsComponent } from './fields/fields.component';
-import { ValidsComponent } from './valids/valids.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -40,12 +39,7 @@ const routes: Routes = [
     path: 'fields/:id',
     component: FieldsComponent,
     data: { title: '表单类型' },
-  },
-  {
-    path: 'valids/:id',
-    component: ValidsComponent,
-    data: { title: '验证规则' },
-  },
+  }
 ];
 
 @NgModule({
