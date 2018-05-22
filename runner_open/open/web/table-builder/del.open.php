@@ -1,6 +1,8 @@
 <?php
 global $_W, $_GPC;
-$id = intval($_GPC['id']);
+$input = $_GPC['__input'];
+
+$id = intval($input['id']);
 pdo_delete('runner_open_table_builder', array('id' => $id));
 
-meepoSuccess('', $id);
+meepoSuccess('删除成功', $id);

@@ -5,7 +5,7 @@
 </page-header>
 <div class="list-container">
   <ng-container *ngFor="let item of list">
-    <list-item [table]="item"></list-item>
+    <list-item (update)="update($event)" [table]="item"></list-item>
   </ng-container>
 </div>
-<nz-pagination [(nzPageIndex)]="pi" [nzPageSize]="ps" [nzTotal]="total" [nzSize]="'small'" (nzPageIndexChange)="nzPageIndexChange" nzShowSizeChanger nzShowQuickJumper></nz-pagination>
+<nz-pagination [(nzPageIndex)]="pi" [nzPageSize]="ps" [nzTotal]="total" [nzSize]="'small'" (nzPageIndexChange)="nzPageIndexChange($event)" nzShowSizeChanger nzShowQuickJumper></nz-pagination>

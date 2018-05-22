@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Iwe7UrlService } from 'iwe7-url';
@@ -11,6 +11,7 @@ import { NzMessageBaseService, NzMessageService } from 'ng-zorro-antd';
 })
 export class ListItemComponent implements OnInit {
   @Input() table: any = {};
+  @Output() update: EventEmitter<any> = new EventEmitter();
   constructor(
     public router: Router,
     public route: ActivatedRoute,
@@ -35,11 +36,12 @@ export class ListItemComponent implements OnInit {
 
   delete() {
     this.http
-      .post(this.url.getWebOpen('web/table/delete'), {
+      .post(this.url.getWebOpen('web/table-builder/del'), {
         id: this.table.id,
       })
       .subscribe((res: any) => {
         this.msg.success(res.msg);
+        this.update.emit();
       });
   }
 }

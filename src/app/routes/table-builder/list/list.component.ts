@@ -15,18 +15,22 @@ export class ListComponent implements OnInit {
   ps: number = 10;
   total: number = 0;
 
-  nzPageIndexChange: any = nzPageIndex => {
-    this.pi = nzPageIndex;
-    this.getList();
-  }
-
   constructor(
     public router: Router,
     public url: Iwe7UrlService,
     public http: HttpClient,
   ) {}
 
+  nzPageIndexChange(nzPageIndex: number) {
+    this.pi = nzPageIndex;
+    this.getList();
+  }
+
   ngOnInit() {
+    this.getList();
+  }
+
+  update() {
     this.getList();
   }
 
