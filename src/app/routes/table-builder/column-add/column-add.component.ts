@@ -70,6 +70,37 @@ export class ColumnAddComponent implements OnInit {
           widget: 'select',
         },
       },
+      exported: {
+        type: 'boolean',
+        default: true,
+        title: '允许导出',
+      },
+      sort: {
+        type: 'string',
+        default: 'desc',
+        title: '排序',
+        enum: [
+          {
+            label: '倒序',
+            value: 'asc',
+          },
+          {
+            label: '正序',
+            value: 'desc',
+          },
+        ],
+        ui: {
+          widget: 'select',
+        },
+      },
+      width: {
+        type: 'string',
+        title: '宽度',
+      },
+      default: {
+        type: 'string',
+        title: '默认值',
+      },
     },
   };
   formData: any = {};

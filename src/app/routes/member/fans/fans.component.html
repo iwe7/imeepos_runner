@@ -1,3 +1,12 @@
-<p>
-  fans works!
-</p>
+<page-header title="所有粉丝">
+  <ng-template #action>
+    <nz-button-group>
+      <button nz-button (click)="export()">导出数据</button>
+    </nz-button-group>
+  </ng-template>
+</page-header>
+<div class="container" *ngIf="table">
+  <sf #sf [schema]="table?.search" mode="search" (formSubmit)="search($event)"></sf>
+  <simple-table (getSimpleTable)="setSimpleTable($event)" [data]="table?.data" [extraParams]="params" [columns]="table?.columns"
+    [resReName]="table?.resReName" [ps]="table?.ps" [showQuickJumper]="table?.showQuickJumper" [showTotal]="table?.showTotal"></simple-table>
+</div>
