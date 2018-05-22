@@ -4,6 +4,7 @@ import { CreateComponent } from './create/create.component';
 import { ListComponent } from './list/list.component';
 import { PreviewComponent } from './preview/preview.component';
 import { ColumnAddComponent } from './column-add/column-add.component';
+import { SearchAddComponent } from './search-add/search-add.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,13 @@ const routes: Routes = [
     component: ColumnAddComponent,
     data: {
       title: '添加列',
+    },
+  },
+  {
+    path: 'search-add/:id',
+    component: SearchAddComponent,
+    data: {
+      title: '添加搜索',
     },
   },
 ];

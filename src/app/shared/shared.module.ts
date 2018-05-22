@@ -63,7 +63,8 @@ const DIRECTIVES = [
   GetElementRefDirective,
   EduiBoxContentDirective,
   EduiBoxBodyDirective,
-  GetSfDirective
+  GetSfDirective,
+  GetSimpleTableDirective
 ];
 // endregion
 
