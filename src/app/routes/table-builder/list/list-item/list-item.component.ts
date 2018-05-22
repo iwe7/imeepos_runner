@@ -11,33 +11,32 @@ import { NzMessageBaseService, NzMessageService } from 'ng-zorro-antd';
 })
 export class ListItemComponent implements OnInit {
   @Input() table: any = {};
-  id: string;
   constructor(
     public router: Router,
     public route: ActivatedRoute,
     public http: HttpClient,
     public url: Iwe7UrlService,
     public msg: NzMessageService,
-  ) {
-    this.route.params.subscribe(res => {
-      this.id = res.id;
-    });
-  }
+  ) {}
 
   ngOnInit() {}
 
   previewForm() {
-    this.router.navigate(['/table/preview', this.id]);
+    setTimeout(() => {
+      this.router.navigate(['/tableBuilder/preview', this.table.id]);
+    }, 200);
   }
 
   editForm() {
-    this.router.navigate(['/table/edit', this.id]);
+    setTimeout(() => {
+      this.router.navigate(['/tableBuilder/edit', this.table.id]);
+    }, 200);
   }
 
   delete() {
     this.http
       .post(this.url.getWebOpen('web/table/delete'), {
-        id: this.id,
+        id: this.table.id,
       })
       .subscribe((res: any) => {
         this.msg.success(res.msg);

@@ -57,6 +57,8 @@ const COMPONENTS = [
 ];
 
 import { GetSfDirective } from './get-sf';
+import { GetSimpleTableDirective } from './get-simple-table';
+
 const DIRECTIVES = [
   GetElementRefDirective,
   EduiBoxContentDirective,

@@ -1,8 +1,21 @@
 <?php
 global $_W, $_GPC;
-$sql = "SELECT * FROM " . tablename('runner_open_table_builder') . " WHERE 1";
-$list = pdo_fetchall($sql, array());
-foreach($list as $li){
-  $li['resReName'] = unserialize($li['resReName']);
+$pi = intval($_GPC['pi']);
+$ps = intval($_GPC['ps']);
+$pi = $pi > 0 ? $pi : 1;
+$ps = $ps > 0 ? $ps : 10;
+$params = array();
+
+$sql = "SELECT * FROM " . tablename('runner_open_table_builder') . " WHERE 1 LIMIT " . ($pi - 1) * $ps . "," . $ps;
+$list = pdo_fetchall($sql, $params);
+$sql = "SELECT COUNT(*) FROM " . tablename('runner_open_table_builder') . " WHERE 1";
+$total = pdo_fetchcolumn($sql, $params);
+foreach ($list as &$li) {
+    $li['resReName'] = unserialize($li['resReName']);
+    $li['create_time'] = date('Y-m-d H:i', $li['create_time']);
 }
-meepoSuccess('', $list);
+unset($li);
+meepoSuccess('', array(
+    'total' => $total,
+    'list' => $list,
+));

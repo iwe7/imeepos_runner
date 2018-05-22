@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Iwe7UrlService } from 'iwe7-url';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import { SimpleTableComponent } from '@delon/abc';
 
 @Component({
   selector: 'preview',
@@ -30,5 +31,11 @@ export class PreviewComponent implements OnInit {
         id: this.id,
       },
     });
+  }
+
+  st: SimpleTableComponent;
+  setSimpleTable(e: any) {
+    this.st = e;
+    console.log(this.st);
   }
 }

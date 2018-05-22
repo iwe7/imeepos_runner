@@ -1,2 +1,13 @@
-<simple-table #st [data]="table.data" [resReName]="data.resReName" [ps]="data.ps" [showQuickJumper]="data.showQuickJumper"
-  [showTotal]="data.showTotal"></simple-table>
+<page-header title="所有表格">
+  <ng-template #action>
+    <nz-button-group>
+      <button nz-button (click)="createTable()">创建表格</button>
+      <button nz-button (click)="createTableColumn()">创建表格列</button>
+    </nz-button-group>
+  </ng-template>
+</page-header>
+<div class="container" *ngIf="table">
+  <sf #sf [schema]="table?.search" mode="search" (formSubmit)="search($event)"></sf>
+  <simple-table (getSimpleTable)="setSimpleTable($event)" [data]="table?.data" [extraParams]="params" [columns]="table?.columns" [resReName]="table?.resReName" [ps]="table?.ps" [showQuickJumper]="table?.showQuickJumper"
+    [showTotal]="table?.showTotal"></simple-table>
+</div>
