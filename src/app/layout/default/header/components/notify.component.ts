@@ -3,6 +3,7 @@ import * as distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
 import { NzMessageService } from 'ng-zorro-antd';
 import { NoticeItem, NoticeIconList } from '@delon/abc';
 import { NotifyService } from '@core/notify.service';
+import { Router } from '@angular/router';
 
 /**
  * 菜单通知
@@ -20,11 +21,19 @@ import { NotifyService } from '@core/notify.service';
   `,
 })
 export class HeaderNotifyComponent {
-  constructor(private msg: NzMessageService, public notify: NotifyService) {}
+  constructor(
+    private msg: NzMessageService,
+    public notify: NotifyService,
+    public router: Router,
+  ) {}
   clear(type: string) {
     this.msg.success(`清空了 ${type}`);
   }
   select(res: any) {
-    this.msg.success(`点击了 ${res.title} 的 ${res.item.title}`);
+    setTimeout(() => {
+      if (res.item.type === 'Bug') {
+        this.router.navigate(['/bug/detail', res.item.id]);
+      }
+    }, 200);
   }
 }

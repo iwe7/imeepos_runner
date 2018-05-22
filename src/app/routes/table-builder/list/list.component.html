@@ -1,0 +1,10 @@
+<page-header title="所有表格">
+  <ng-template #action>
+    <button nz-button (click)="createTable()">创建表单</button>
+  </ng-template>
+</page-header>
+<div class="list-container">
+  <ng-container *ngFor="let item of list">
+    <list-item [table]="item"></list-item>
+  </ng-container>
+</div>

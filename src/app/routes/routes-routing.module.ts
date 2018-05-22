@@ -72,6 +72,7 @@ const routes: Routes = [
       { path: 'member', loadChildren: './member/member.module#MemberModule' },
       { path: 'cms', loadChildren: './cms/cms.module#CmsModule' },
       { path: 'formsBuilder', loadChildren: './forms-builder/forms-builder.module#FormsBuilderModule' },
+      { path: 'tableBuilder', loadChildren: './table-builder/table-builder.module#TableBuilderModule' },
     ],
   },
   // 全屏布局

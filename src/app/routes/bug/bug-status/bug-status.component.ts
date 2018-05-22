@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 
 import { Iwe7UrlService } from 'iwe7-url';
 import { map } from 'rxjs/operators';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'bug-status',
@@ -19,6 +20,8 @@ export class BugStatusComponent implements OnInit {
     public location: Location,
     public http: HttpClient,
     public url: Iwe7UrlService,
+    public msg: NzMessageService,
+    public router: Router
   ) {
     this.route.params.subscribe(res => {
       this.id = res.id;
@@ -34,7 +37,6 @@ export class BugStatusComponent implements OnInit {
       .pipe(map((res: any) => res.data))
       .subscribe(res => {
         this.detail = res;
-        console.log(this.detail);
       });
   }
 
@@ -44,7 +46,24 @@ export class BugStatusComponent implements OnInit {
     this.location.back();
   }
 
-  close() {}
+  close() {
+    this.http
+      .post(this.url.getWebOpen('web/bug/update'), {
+        id: this.id,
+        status: -1,
+      })
+      .subscribe(res => {
+        this.back();
+      });
+  }
 
-  cui() {}
+  cui() {
+    this.http
+      .post(this.url.getWebOpen('web/bug/cui'), {
+        id: this.id,
+      })
+      .subscribe((res: any) => {
+        this.msg.success(res.msg);
+      });
+  }
 }

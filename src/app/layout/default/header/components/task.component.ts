@@ -12,7 +12,7 @@ import { NoticeService } from '@core/notice.service';
       </nz-badge>
     </div>
     <div nz-menu class="wd-lg" style="min-width: 240px;">
-      <nz-card nzTitle="消息提醒" [nzLoading]="notice.loading" class="ant-card__body-nopadding">
+      <nz-card [nzTitle]="null" [nzLoading]="notice.loading" class="ant-card__body-nopadding">
         <ng-template #extra><i class="anticon anticon-plus"></i></ng-template>
         <div nz-row *ngFor="let item of notice.list" [nzType]="'flex'" [nzJustify]="'center'" [nzAlign]="'middle'" class="py-sm bg-grey-lighter-h point">
           <div nz-col [nzSpan]="4" class="text-center">

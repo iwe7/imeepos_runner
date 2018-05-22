@@ -5,8 +5,11 @@ $data = array();
 $data['title'] = $input['title'];
 $data['desc'] = $input['desc'];
 $data['uniacid'] = $_W['uniacid'];
+$data['painame'] = '杨明明';
+$data['realname'] = $input['realname'];
+
 $data['create_time'] = time();
-$data['status'] = 0;
+$data['status'] = 1;
 
 pdo_insert('runner_open_bug', $data);
 $data['id'] = pdo_insertid();

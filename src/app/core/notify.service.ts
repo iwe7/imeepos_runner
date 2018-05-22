@@ -18,12 +18,12 @@ export class NotifyService {
       clearText: '清空通知',
     },
     {
-      title: '消息',
+      title: 'Bug',
       list: [],
-      emptyText: '您已读完所有消息',
+      emptyText: '您已读完所有Bug消息',
       emptyImage:
         'https://gw.alipayobjects.com/zos/rmsportal/sAuJeJzSKbUmHfBQRzmZ.svg',
-      clearText: '清空消息',
+      clearText: '清空Bug消息',
     },
     {
       title: '更新',
